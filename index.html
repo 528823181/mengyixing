@@ -125,6 +125,7 @@ body[data-mode=senior] .mode-preview p{font-size:16px;line-height:1.65}
 .atlas-pin{position:absolute;z-index:2;display:grid;place-items:center;width:44px;height:44px;transform:translate(-50%,-50%);padding:0;border:0;background:transparent;color:#e6faff;cursor:pointer;border-radius:50%;-webkit-tap-highlight-color:transparent}
 .atlas-pin[aria-pressed="true"],.atlas-pin:hover,.atlas-pin:focus-visible{z-index:4}
 .atlas-pin:focus-visible,.atlas-choice:focus-visible,.atlas-detail-link:focus-visible{outline:3px solid #35c4f6;outline-offset:3px}
+.atlas-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .atlas-dot{position:relative;z-index:2;display:grid;place-items:center;width:30px;height:30px;border:1px solid #ccfbff;border-radius:50%;background:#0b344d;color:#f5fcff;font-size:11px;font-weight:700;box-shadow:0 0 0 4px #72d9ff2b,0 0 16px #81d5e44f}
 .atlas-pin[aria-pressed="true"] .atlas-dot,.atlas-pin:hover .atlas-dot{background:#c9f7ff;color:#07283d;box-shadow:0 0 0 4px #76deff48,0 0 26px #76deffb0}
 .atlas-pin-name{position:absolute;top:50%;left:100%;transform:translateY(-50%);white-space:nowrap;padding:5px 8px;border:1px solid #a7dae44a;border-radius:6px;background:#102b3df0;color:#f5fcff;font-size:12px;line-height:1.25;pointer-events:none}
@@ -140,7 +141,6 @@ body[data-mode=senior] .mode-preview p{font-size:16px;line-height:1.65}
 @media(prefers-reduced-motion:reduce){.atlas-pulse{display:none;animation:none}}
 .atlas-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .atlas-choice{min-height:44px;display:flex;align-items:center;justify-content:center;gap:5px;padding:5px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:var(--white);font:inherit;font-size:13px;cursor:pointer;line-height:1.3}
-.atlas-choice span:first-child{font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
 .atlas-choice[aria-pressed="true"]{color:#fff;background:var(--ink);border-color:var(--ink)}
 .atlas-card{min-width:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--white)}
 .atlas-photo-frame{margin:0;position:relative;background:var(--tour-panel);isolation:isolate}
@@ -481,7 +481,7 @@ function selectAtlasPoint(index) {
 }
 
 atlasPoints.forEach((point, index) => {
-  const number = destinations[index].number;
+
   const pin = document.createElement('button');
   pin.type = 'button';
   pin.className = 'atlas-pin';
@@ -491,7 +491,7 @@ atlasPoints.forEach((point, index) => {
   pin.style.left = `${position.x / 9.2}%`;
   pin.style.top = `${position.y / 6.4}%`;
   pin.dataset.side = point.side;
-  pin.innerHTML = `<span class="atlas-dot" aria-hidden="true">${number}</span><span class="atlas-pin-name" aria-hidden="true">${point.name}</span>`;
+  pin.innerHTML = `<span class="atlas-dot" aria-hidden="true"></span><span class="atlas-pin-name" aria-hidden="true">${point.name}</span>`;
   pin.addEventListener('click', () => selectAtlasPoint(index));
   atlasPins.push(pin);
   $('#atlas-markers').append(pin);
@@ -500,7 +500,7 @@ atlasPoints.forEach((point, index) => {
   choice.type = 'button';
   choice.className = 'atlas-choice';
   choice.setAttribute('aria-controls', 'atlas-reading');
-  choice.innerHTML = `<span aria-hidden="true">${number}</span><span>${point.name}</span>`;
+  choice.textContent = point.name;
   choice.addEventListener('click', () => selectAtlasPoint(index));
   atlasChoices.push(choice);
   $('#atlas-choices').append(choice);
