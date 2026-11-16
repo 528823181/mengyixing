@@ -214,6 +214,22 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
   .atlas-photo-frame img{height:auto;min-height:0;position:static}
   .atlas-pin{width:30px;height:30px}
 }
+.panorama-entry{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:50px;width:100%;text-align:left;color:var(--ink);background:var(--white)}
+.panorama-entry:hover{background:var(--tour-panel)}
+.panorama-entry strong,.panorama-entry small{display:block}
+.panorama-entry small{font-size:12px}
+.panorama-external{display:inline-flex;align-items:center;min-height:44px;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+#immersive-scene{height:auto;min-height:0}
+#immersive-photo{position:static;width:100%;height:auto;max-height:60vh;object-fit:contain;object-position:center}
+#panorama-view{width:100%;height:clamp(220px,52vw,500px);height:clamp(220px,52dvh,500px);background:#102c3a}
+.panorama-controls{padding:12px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center}
+.panorama-controls label{font-weight:650}
+.panorama-controls input{grid-column:1/-1;width:100%;height:32px;margin:0;accent-color:var(--ink);cursor:ew-resize}
+.panorama-controls button{padding:6px 10px;min-height:40px;background:var(--tour-panel);border-radius:7px;font-size:13px}
+.panorama-controls p{grid-column:1/-1;font-size:12px;color:var(--ink-soft)}
+.scene-details{padding:10px 18px;font-size:12px;color:var(--ink-soft)}
+.scene-details a{text-decoration:underline;text-underline-offset:3px}
+#panorama-status{padding:9px 18px;color:var(--ink)}
 </style>
   
 </head>
@@ -279,6 +295,10 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
             <small class="atlas-map-note">内蒙古自治区 · 景点导览</small>
           </div>
           <div class="atlas-choices" id="atlas-choices" role="group" aria-label="按名称选择景点"></div>
+          <button class="panorama-entry" type="button" id="open-ergun">
+            <span><strong>呼伦贝尔 · 额尔古纳</strong><small>360°实拍全景</small></span>
+            <span aria-hidden="true">↗</span>
+          </button>
         </div>
         <div class="atlas-empty" id="atlas-empty">
           <span class="atlas-empty-icon" aria-hidden="true">◎</span>
@@ -288,7 +308,7 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
           <figure class="atlas-photo-frame">
             <img id="atlas-photo" width="800" height="500" alt="">
             <figcaption id="atlas-region"></figcaption>
-            <button type="button" class="scene-expand" id="expand-scene">拖动看风景 <span aria-hidden="true">↗</span></button>
+            <button type="button" class="scene-expand" id="expand-scene">查看实景照片 <span aria-hidden="true">↗</span></button>
           </figure>
           <div class="atlas-card-body">
             <div id="atlas-reading">
@@ -315,6 +335,7 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
               <button type="button" id="atlas-next">下一站 <span aria-hidden="true">→</span></button>
             </div>
             <a class="source-link" id="destination-source" target="_blank" rel="noopener">查看讲解来源</a>
+            <a class="panorama-external" id="dazhao-panorama" href="https://www.360cities.net/zh/image/huhehaote-dazhaosi-4" target="_blank" rel="noopener" hidden>大召寺 360°全景 · 查看原站 <span aria-hidden="true">↗</span></a>
             <a class="ai-link atlas-chat" target="_blank" rel="noopener">问蒙益行 <span aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -326,7 +347,28 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
     <section class="companion section" id="companion"><img src="assets/guide.webp" width="155" height="212" alt="蒙益行文化向导" loading="lazy"><div><p class="eyebrow">GOOD COMPANY, AT YOUR PACE</p><h2>有问题，就和蒙益行聊聊。</h2><p>想听一个故事、准备公益讲解，或只是有个日常问题。<br>把你的想法告诉我，我们从这里继续。</p></div><a class="button navy ai-link" target="_blank" rel="noopener">打开 AI 对话 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer><div class="footer-brand"><strong>蒙益行</strong><span>让北疆文化触手可及。</span></div><div class="footer-notes"><span>公益文化导览 · 图文云游</span><button id="sources-open">内容来源与使用说明</button><a href="#home">回到顶部 ↑</a></div></footer>
-  <dialog id="scene-dialog" aria-labelledby="scene-dialog-title"><div class="dialog-header"><div><span class="small-label">图文云游</span><h2 id="scene-dialog-title">呼伦贝尔</h2></div><button class="close-dialog" data-close="scene-dialog" aria-label="关闭风景">×</button></div><div id="immersive-scene"><img id="immersive-photo" alt=""></div><div class="scene-controls"><label for="scene-pan">左右移动照片</label><input id="scene-pan" type="range" min="0" max="100" value="50"><p>拖动滑杆，观察画面的不同部分。</p></div></dialog>
+  <dialog id="scene-dialog" aria-labelledby="scene-dialog-title">
+    <div class="dialog-header">
+      <div><span class="small-label" id="scene-kind"></span><h2 id="scene-dialog-title"></h2></div>
+      <button class="close-dialog" data-close="scene-dialog" aria-label="关闭风景">×</button>
+    </div>
+    <div id="immersive-scene">
+      <img id="immersive-photo" alt="" hidden>
+      <div id="panorama-view" hidden></div>
+    </div>
+    <p id="panorama-status" role="status" hidden></p>
+    <div class="panorama-controls" id="panorama-controls" hidden>
+      <label for="scene-pan">旋转视角 <output id="scene-angle" for="scene-pan">0°</output></label>
+      <button type="button" id="reset-panorama">回到初始视角</button>
+      <input id="scene-pan" type="range" min="0" max="360" step="1" value="0">
+      <p>也可以直接拖动画面，左右转动、上下看。</p>
+    </div>
+    <p class="scene-details" id="panorama-credit" hidden>
+      拍摄地点为额尔古纳市黑山头镇梁西村与根河一带。
+      <a href="https://commons.wikimedia.org/wiki/File:额尔古纳_航拍黑山头镇梁西村与根河之全景.jpg" target="_blank" rel="noopener">原图及网页版全景</a> · Liuxingy ·
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> · 已缩小并转为 WebP。
+    </p>
+  </dialog>
   <dialog id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-header"><h2 id="sources-title">内容来源与使用说明</h2><button class="close-dialog" data-close="sources-dialog" aria-label="关闭使用说明">×</button></div><div class="sources-content"><p>文化与自然知识参考以下公开资料，各主题旁也可直接查看来源。</p><ul id="source-list"></ul><h3>照片来源与授权</h3><ul id="photo-sources"></ul><h3>地图与点位来源</h3><p>边界采用<a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener">阿里云 DataV 地理小工具</a>内蒙古自治区及盟市边界数据。边界与点位使用统一的墨卡托投影。河流、沙漠和胡杨林采用标明的代表位置。</p><ul><li><a href="https://www.amap.com/place/B0J10U123W" target="_blank" rel="noopener">莫尔格勒河 · 代表点 · 浩林温都日观景区</a> · 东经 120.0892°，北纬 49.6624°</li><li><a href="https://commons.wikimedia.org/wiki/Category:Kubuqi_Desert" target="_blank" rel="noopener">库布其沙漠 · 代表点 · 库布其沙漠中段</a> · 东经 109.3170°，北纬 40.3333°</li><li><a href="https://html.rhhz.net/DSJYJ/20190603.htm" target="_blank" rel="noopener">阿尔山天池 · 阿尔山天池湖心</a> · 东经 120.4100°，北纬 47.3200°</li><li><a href="https://commons.wikimedia.org/wiki/File:内蒙古_额济纳_胡杨林的秋天_-_panoramio.jpg" target="_blank" rel="noopener">额济纳胡杨林 · 代表点 · 额济纳胡杨林照片拍摄地</a> · 东经 101.0837°，北纬 41.9666°</li><li><a href="https://www.openstreetmap.org/way/351281717" target="_blank" rel="noopener">大召寺 · 大召寺院区</a> · 东经 111.6470°，北纬 40.7987°</li><li><a href="https://whc.unesco.org/en/list/1389/maps/" target="_blank" rel="noopener">元上都遗址 · 世界遗产登记位置</a> · 东经 116.1851°，北纬 42.3580°</li></ul><h3>关于体验馆</h3><p>普通、银龄简明、青少年探索模式分别调整讲解表达。文化挑战只计算本轮实际作答成绩，刷新页面后重新开始。页面不收集身份、住址等个人资料。</p><p>景区票价、开放时间等信息请以景区最新公告为准。</p></div></dialog>
   <noscript><p class="noscript">请启用浏览器 JavaScript，使用景点地图和文化挑战。</p></noscript>
 <script>
@@ -522,6 +564,7 @@ function renderAtlas() {
   $('#atlas-observation').textContent = selected.task;
   $('#destination-source').href = selected.source;
   $('#destination-source').title = selected.sourceName;
+  $('#dazhao-panorama').hidden = selected.id !== 'dazhao';
   for (const [index, pin] of atlasPins.entries()) {
     const pressed = String(index === destination);
     pin.setAttribute('aria-pressed', pressed);
@@ -726,23 +769,143 @@ $('#quiz-next').addEventListener('click',()=>{
   if(quiz.complete)$('#result-title').focus();
 });
 $('#quiz-reset').addEventListener('click',()=>{quiz=createQuiz(questions.length);renderQuiz()});
-const scenePhoto=$('#immersive-photo');
-const scenePan=$('#scene-pan');
-function updateScenePosition(){
-  // The image is 120% of the frame, so translating by 1/6 reveals its full width.
-  scenePhoto.style.transform=`translateX(${-Number(scenePan.value)/6}%)`;
+const sceneDialog = $('#scene-dialog');
+const scenePhoto = $('#immersive-photo');
+const panoramaView = $('#panorama-view');
+const panoramaStatus = $('#panorama-status');
+const panoramaControls = $('#panorama-controls');
+const panoramaCredit = $('#panorama-credit');
+const scenePan = $('#scene-pan');
+const initialPitch = -13;
+let panoramaLibrary;
+let viewer;
+let dragFrame = 0;
+let sceneRevision = 0;
+
+function loadPanoramaLibrary() {
+  if (!panoramaLibrary) {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.href = 'vendor/pannellum/pannellum.css';
+    const script = document.createElement('script');
+    script.src = 'vendor/pannellum/pannellum.js';
+    const loaded = node => new Promise((resolve, reject) => {
+      node.onload = resolve;
+      node.onerror = reject;
+      document.head.append(node);
+    });
+    panoramaLibrary = Promise.all([loaded(style), loaded(script)]).catch(error => {
+      style.remove();
+      script.remove();
+      panoramaLibrary = undefined;
+      throw error;
+    });
+  }
+  return panoramaLibrary;
 }
-$('#expand-scene').addEventListener('click',()=>{
-  const d=destinations[destination];
-  const photo=photos[d.id];
-  $('#scene-dialog-title').textContent=photo.label;
-  scenePhoto.src=d.image;
-  scenePhoto.alt=photo.label;
-  scenePan.value='50';
-  updateScenePosition();
-  $('#scene-dialog').showModal();
+
+function setAngle(angle) {
+  scenePan.value = String(angle);
+  $('#scene-angle').value = `${angle}°`;
+  scenePan.setAttribute('aria-valuetext', `相对起始视角 ${angle} 度`);
+}
+
+function syncPanoramaAngle() {
+  if (!viewer) return;
+  const angle = Math.round((viewer.getYaw() % 360 + 360) % 360) % 360;
+  setAngle(angle === 0 && scenePan.value === '360' ? 360 : angle);
+}
+
+function followDrag() {
+  syncPanoramaAngle();
+  dragFrame = requestAnimationFrame(followDrag);
+}
+
+function stopFollowingDrag() {
+  cancelAnimationFrame(dragFrame);
+  dragFrame = 0;
+}
+
+function showScene(title, kind, isPanorama) {
+  $('#scene-dialog-title').textContent = title;
+  $('#scene-kind').textContent = kind;
+  panoramaView.hidden = !isPanorama;
+  panoramaCredit.hidden = !isPanorama;
+  panoramaStatus.hidden = !isPanorama;
+  panoramaControls.hidden = true;
+  scenePhoto.hidden = isPanorama;
+  sceneDialog.showModal();
+}
+
+$('#expand-scene').addEventListener('click', () => {
+  const selected = destinations[destination];
+  const photo = photos[selected.id];
+  scenePhoto.src = selected.image;
+  scenePhoto.alt = photo.label;
+  showScene(photo.label, '实景照片', false);
 });
-scenePan.addEventListener('input',updateScenePosition);
+
+function showPanoramaError() {
+  panoramaStatus.hidden = false;
+  panoramaStatus.textContent = '暂时无法加载互动全景。可从下方原图页面打开网页版全景。';
+  panoramaView.hidden = true;
+  panoramaControls.hidden = true;
+}
+
+$('#open-ergun').addEventListener('click', async () => {
+  const revision = ++sceneRevision;
+  panoramaStatus.textContent = '正在加载全景…';
+  showScene('额尔古纳 · 黑山头镇与根河', '360°实拍全景', true);
+  try {
+    await loadPanoramaLibrary();
+    if (revision !== sceneRevision || !sceneDialog.open) return;
+    viewer = window.pannellum.viewer(panoramaView, {
+      type: 'equirectangular',
+      panorama: 'assets/ergun-360.webp',
+      autoLoad: false,
+      showControls: false,
+      keyboardZoom: false,
+      mouseZoom: false,
+      doubleClickZoom: false,
+      friction: 1,
+      pitch: initialPitch,
+      hfov: panoramaView.clientWidth < 520 ? 83 : 105
+    });
+    viewer.on('load', () => {
+      panoramaStatus.hidden = true;
+      panoramaControls.hidden = false;
+      setAngle(0);
+    });
+    viewer.on('error', showPanoramaError);
+    for (const event of ['mousedown', 'touchstart']) {
+      viewer.on(event, () => { if (!dragFrame) followDrag(); });
+    }
+    for (const event of ['mouseup', 'touchend', 'animatefinished']) {
+      viewer.on(event, () => { stopFollowingDrag(); syncPanoramaAngle(); });
+    }
+    viewer.loadScene();
+  } catch {
+    if (revision === sceneRevision && sceneDialog.open) showPanoramaError();
+  }
+});
+
+scenePan.addEventListener('input', () => {
+  if (!viewer) return;
+  const angle = Number(scenePan.value);
+  viewer.setYaw(angle, false);
+  setAngle(angle);
+});
+$('#reset-panorama').addEventListener('click', () => {
+  viewer.lookAt(initialPitch, 0, undefined, false);
+  setAngle(0);
+});
+sceneDialog.addEventListener('close', () => {
+  sceneRevision++;
+  stopFollowingDrag();
+  viewer?.destroy();
+  viewer = undefined;
+  panoramaView.replaceChildren();
+});
 $('#sources-open').addEventListener('click',()=>$('#sources-dialog').showModal());
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.close).close()));
 document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}}));
