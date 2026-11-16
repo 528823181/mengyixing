@@ -220,7 +220,11 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
 .panorama-entry small{font-size:12px}
 .panorama-external{display:inline-flex;align-items:center;min-height:44px;font-size:14px;text-decoration:underline;text-underline-offset:3px}
 #immersive-scene{height:auto;min-height:0}
-#immersive-photo{position:static;width:100%;height:auto;max-height:60vh;object-fit:contain;object-position:center}
+#scene-dialog{max-height:calc(100dvh - 16px);overflow:auto}
+.photo-window{height:clamp(150px,47vh,530px);height:clamp(150px,47dvh,530px);overflow:hidden}
+#immersive-photo{position:static;width:125%;max-width:none;height:100%;object-fit:cover;object-position:center;transform:translateX(var(--photo-offset,-10%))}
+.photo-controls{border-top:1px solid var(--line)}
+.photo-controls .panorama-entry{grid-column:1/-1;margin-top:4px;font-weight:500;padding:6px 10px;min-height:44px}
 #panorama-view{width:100%;height:clamp(220px,52vw,500px);height:clamp(220px,52dvh,500px);background:#102c3a}
 .panorama-controls{padding:12px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center}
 .panorama-controls label{font-weight:650}
@@ -352,16 +356,24 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
       <div><span class="small-label" id="scene-kind"></span><h2 id="scene-dialog-title"></h2></div>
       <button class="close-dialog" data-close="scene-dialog" aria-label="关闭风景">×</button>
     </div>
-    <div id="immersive-scene">
-      <img id="immersive-photo" alt="" hidden>
-      <div id="panorama-view" hidden></div>
+    <div class="panorama-controls photo-controls" id="photo-controls" hidden>
+      <label for="photo-pan">左右移动照片</label>
+      <input id="photo-pan" type="range" min="0" max="100" value="50">
+      <button class="panorama-entry" type="button" id="open-ergun-from-photo" hidden>
+        <span>额尔古纳 · 360°实拍全景</span><span aria-hidden="true">↗</span>
+      </button>
+      <a class="panorama-external" id="open-dazhao-from-photo" href="https://www.360cities.net/zh/image/huhehaote-dazhaosi-4" target="_blank" rel="noopener" hidden>大召寺 360°全景 · 查看原站 <span aria-hidden="true">↗</span></a>
     </div>
-    <p id="panorama-status" role="status" hidden></p>
     <div class="panorama-controls" id="panorama-controls" hidden>
       <label for="scene-pan">旋转视角 <output id="scene-angle" for="scene-pan">0°</output></label>
       <button type="button" id="reset-panorama">回到初始视角</button>
       <input id="scene-pan" type="range" min="0" max="360" step="1" value="0">
       <p>也可以直接拖动画面，左右转动、上下看。</p>
+    </div>
+    <p id="panorama-status" role="status" hidden></p>
+    <div id="immersive-scene">
+      <div class="photo-window" id="photo-window" hidden><img id="immersive-photo" alt=""></div>
+      <div id="panorama-view" hidden></div>
     </div>
     <p class="scene-details" id="panorama-credit" hidden>
       拍摄地点为额尔古纳市黑山头镇梁西村与根河一带。
@@ -771,6 +783,7 @@ $('#quiz-next').addEventListener('click',()=>{
 $('#quiz-reset').addEventListener('click',()=>{quiz=createQuiz(questions.length);renderQuiz()});
 const sceneDialog = $('#scene-dialog');
 const scenePhoto = $('#immersive-photo');
+const photoPan = $('#photo-pan');
 const panoramaView = $('#panorama-view');
 const panoramaStatus = $('#panorama-status');
 const panoramaControls = $('#panorama-controls');
@@ -833,15 +846,27 @@ function showScene(title, kind, isPanorama) {
   panoramaCredit.hidden = !isPanorama;
   panoramaStatus.hidden = !isPanorama;
   panoramaControls.hidden = true;
-  scenePhoto.hidden = isPanorama;
-  sceneDialog.showModal();
+  $('#photo-controls').hidden = isPanorama;
+  $('#photo-window').hidden = isPanorama;
+  if (!sceneDialog.open) sceneDialog.showModal();
+  sceneDialog.scrollTop = 0;
 }
+
+function panPhoto() {
+  scenePhoto.style.setProperty('--photo-offset', `${-Number(photoPan.value) / 5}%`);
+}
+
+photoPan.addEventListener('input', panPhoto);
 
 $('#expand-scene').addEventListener('click', () => {
   const selected = destinations[destination];
   const photo = photos[selected.id];
   scenePhoto.src = selected.image;
   scenePhoto.alt = photo.label;
+  photoPan.value = '50';
+  panPhoto();
+  $('#open-ergun-from-photo').hidden = selected.id !== 'grassland';
+  $('#open-dazhao-from-photo').hidden = selected.id !== 'dazhao';
   showScene(photo.label, '实景照片', false);
 });
 
@@ -852,10 +877,11 @@ function showPanoramaError() {
   panoramaControls.hidden = true;
 }
 
-$('#open-ergun').addEventListener('click', async () => {
+async function openErgunPanorama() {
   const revision = ++sceneRevision;
   panoramaStatus.textContent = '正在加载全景…';
   showScene('额尔古纳 · 黑山头镇与根河', '360°实拍全景', true);
+  sceneDialog.querySelector('.close-dialog').focus();
   try {
     await loadPanoramaLibrary();
     if (revision !== sceneRevision || !sceneDialog.open) return;
@@ -887,7 +913,10 @@ $('#open-ergun').addEventListener('click', async () => {
   } catch {
     if (revision === sceneRevision && sceneDialog.open) showPanoramaError();
   }
-});
+}
+
+$('#open-ergun').addEventListener('click', openErgunPanorama);
+$('#open-ergun-from-photo').addEventListener('click', openErgunPanorama);
 
 scenePan.addEventListener('input', () => {
   if (!viewer) return;
