@@ -88,4 +88,15 @@
   </details>
   <footer><p>出发前请查看景区当期的开放、预约和交通公告。</p><a href="./#atlas">查看北疆体验馆景点地图 →</a></footer>
 </main>
+<script>
+  function openLinkedGuide() {
+    const guide = document.getElementById(location.hash.slice(1));
+    if (guide instanceof HTMLDetailsElement) {
+      guide.open = true;
+      guide.scrollIntoView({ block: 'start' });
+    }
+  }
+  openLinkedGuide();
+  window.addEventListener('hashchange', openLinkedGuide);
+</script>
 </html>
