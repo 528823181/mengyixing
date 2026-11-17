@@ -191,7 +191,6 @@ body[data-mode=senior] .atlas-guide dd,body[data-mode=senior] .atlas-card-body .
 .atlas-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:10px}
 .atlas-actions a,.atlas-actions button{display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:44px;padding:6px 12px;border-radius:7px;color:var(--ink);background:var(--tour-panel);font:inherit;font-size:14px}
 .atlas-actions button{background:var(--ink);color:var(--white)}
-.heritage-layout:has(.heritage-art[hidden]){grid-template-columns:minmax(0,1fr)}
 .challenge-section::before{pointer-events:none}
 .challenge-intro .button{margin-top:18px}
 body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
@@ -384,7 +383,9 @@ const photos={
   desert:{label:'鄂尔多斯 · 库布其沙漠',author:'Popolon',source:'https://commons.wikimedia.org/wiki/File:Kubuqi.dunes_et_stupa.jpg',license:'CC BY-SA 4.0',licenseUrl:shareAlikeLicense},
   forest:{label:'兴安盟 · 阿尔山天池',author:'維基小霸王',source:'https://commons.wikimedia.org/wiki/File:阿尔山天池_全景.jpg',license:'CC BY-SA 4.0',licenseUrl:shareAlikeLicense},
   camel:{label:'鄂尔多斯 · 响沙湾',author:'Popolon',source:'https://commons.wikimedia.org/wiki/File:Kubuqi.chameaux.jpg',license:'CC BY-SA 4.0',licenseUrl:shareAlikeLicense},
-  fiddle:{label:'内蒙古博物院 · 马头琴',author:'Gary Lee Todd, Ph.D.',source:'https://commons.wikimedia.org/wiki/File:Mongol_Stringed_Instrument_(19607033639).jpg',license:'CC0 1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/'}
+  fiddle:{image:"assets/morin-khuur.webp",label:'内蒙古博物院 · 马头琴',author:'Gary Lee Todd, Ph.D.',source:'https://commons.wikimedia.org/wiki/File:Mongol_Stringed_Instrument_(19607033639).jpg',license:'CC0 1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/'},
+  song:{image:'assets/long-song.webp',label:'蒙古族长调 · 演唱现场',author:'J bayarmagnai',source:'https://commons.wikimedia.org/wiki/File:0K8A1178.jpg',license:'CC0 1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/'},
+  craft:{image:'assets/lele-cart.webp',label:'勒勒车 · 传统木制车架与车轮',author:'作者不详（PxHere）',source:'https://commons.wikimedia.org/wiki/File:Mongolian_wooden_cart.jpg',license:'CC0 1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/'}
 };
 const readingModes = { normal: '普通导览', senior: '银龄简明', youth: '青少年探索' };
 const destinations=[
@@ -701,7 +702,11 @@ $('#atlas-back').addEventListener('click', () => $('#atlas-title').focus({ preve
 
 function renderHeritage(){
   const h=heritage[heritageIndex];
-  $('.heritage-art').hidden=h.id!=='fiddle';
+  const photo = photos[h.id];
+  const image = $('.heritage-art img');
+  if (image.getAttribute('src') !== photo.image) image.src = photo.image;
+  image.alt = photo.label;
+  $('.heritage-art figcaption').textContent = photo.label;
   $('#heritage-category').textContent=h.category;$('#heritage-copy-title').textContent=h.title;
   $('#heritage-text').textContent=h.text[mode];$('#heritage-detail').textContent=h.detail;
   $('#heritage-source').textContent=`资料参考：${h.sourceName}`;$('#heritage-source').href=h.source;
