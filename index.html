@@ -218,9 +218,6 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
 .panorama-entry:hover{background:var(--tour-panel)}
 .panorama-entry strong,.panorama-entry small{display:block}
 .panorama-entry small{font-size:12px}
-.tour-controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px 12px;padding:8px 18px;font-size:13px}
-.tour-controls button{background:var(--tour-panel);border-radius:7px;padding:6px 11px;min-height:44px}
-#scenic-tour-player{display:block;width:100%;height:min(56dvh,550px);min-height:200px;border:0;background:#102c3a}
 #immersive-scene{height:auto;min-height:0}
 #scene-dialog{max-height:calc(100dvh - 16px);overflow:auto}
 .photo-window{height:clamp(150px,47vh,530px);height:clamp(150px,47dvh,530px);overflow:hidden}
@@ -341,9 +338,6 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
               <button type="button" id="atlas-next">下一站 <span aria-hidden="true">→</span></button>
             </div>
             <a class="source-link" id="destination-source" target="_blank" rel="noopener">查看讲解来源</a>
-            <button class="panorama-entry" type="button" id="open-scenic-tour" hidden>
-              <strong>360°全景漫游</strong><span aria-hidden="true">→</span>
-            </button>
             <a class="ai-link atlas-chat" target="_blank" rel="noopener">问蒙益行 <span aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -366,9 +360,6 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
       <button class="panorama-entry" type="button" id="open-ergun-from-photo" hidden>
         <span>额尔古纳 · 360°实拍全景</span><span aria-hidden="true">↗</span>
       </button>
-      <button class="panorama-entry" type="button" id="tour-from-photo" hidden>
-        <span>查看此景点的 360°全景</span><span aria-hidden="true">→</span>
-      </button>
     </div>
     <div class="panorama-controls" id="panorama-controls" hidden>
       <label for="scene-pan">旋转视角 <output id="scene-angle" for="scene-pan">0°</output></label>
@@ -377,16 +368,10 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
       <p>也可以直接拖动画面，左右转动、上下看。</p>
     </div>
     <p id="panorama-status" role="status" hidden></p>
-    <div class="tour-controls" id="tour-controls" hidden>
-      <span>拖动画面转动视角</span>
-      <button type="button" id="tour-back">返回实景照片</button>
-    </div>
     <div id="immersive-scene">
       <div class="photo-window" id="photo-window" hidden><img id="immersive-photo" alt=""></div>
       <div id="panorama-view" hidden></div>
-      <div id="scenic-tour" hidden></div>
     </div>
-    <p class="scene-details" id="tour-credit" hidden></p>
     <p class="scene-details" id="panorama-credit" hidden>
       拍摄地点为额尔古纳市黑山头镇梁西村与根河一带。
       <a href="https://commons.wikimedia.org/wiki/File:额尔古纳_航拍黑山头镇梁西村与根河之全景.jpg" target="_blank" rel="noopener">原图及网页版全景</a> · Liuxingy ·
@@ -397,14 +382,6 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
   <noscript><p class="noscript">请启用浏览器 JavaScript，使用景点地图和文化挑战。</p></noscript>
 <script>
 const chatUrl='https://robot.chaoxing.com/coze/web?unitId=353067&robotId=ff7d7c31ceb14329a335a7ee9bba132a';
-const scenicTours = {
-  grassland: {id: 'e2e24jfOyyi', title: '呼伦贝尔 · 莫日格勒河', author: 'VR童话视界'},
-  desert: {id: 'b042aqzd9en', title: '库布其沙漠 · 响沙湾', author: 'JESSE-ZMY'},
-  forest: {id: '331jvdumra2', title: '兴安盟 · 阿尔山天池', author: '旅行摄影人'},
-  ejina: {id: '4dvkubdb51b', title: '阿拉善盟 · 额济纳胡杨林', author: '拉风的猫'},
-  dazhao: {id: '4af2fqrkyuw', title: '呼和浩特 · 大召无量寺', author: '那日图'},
-  xanadu: {id: '8d3juphnta2', title: '锡林郭勒盟 · 元上都遗址', author: '王佃栋'}
-};
 const shareAlikeLicense='https://creativecommons.org/licenses/by-sa/4.0/';
 const photos={
   grassland:{label:'呼伦贝尔 · 莫尔格勒河',author:'Liuxingy',source:'https://commons.wikimedia.org/wiki/File:陈巴尔虎旗_莫尔格勒河浩林温都日观景区_09.jpg',license:'CC BY-SA 4.0',licenseUrl:shareAlikeLicense},
@@ -596,7 +573,6 @@ function renderAtlas() {
   $('#atlas-observation').textContent = selected.task;
   $('#destination-source').href = selected.source;
   $('#destination-source').title = selected.sourceName;
-  $('#open-scenic-tour').hidden = !scenicTours[selected.id];
   for (const [index, pin] of atlasPins.entries()) {
     const pressed = String(index === destination);
     pin.setAttribute('aria-pressed', pressed);
@@ -815,13 +791,6 @@ let viewer;
 let dragFrame = 0;
 let sceneRevision = 0;
 
-function clearScenicTour() {
-  $('#scenic-tour').replaceChildren();
-  $('#scenic-tour').hidden = true;
-  $('#tour-controls').hidden = true;
-  $('#tour-credit').hidden = true;
-}
-
 function loadPanoramaLibrary() {
   if (!panoramaLibrary) {
     const style = document.createElement('link');
@@ -885,8 +854,7 @@ function panPhoto() {
 
 photoPan.addEventListener('input', panPhoto);
 
-function openScenicPhoto() {
-  clearScenicTour();
+$('#expand-scene').addEventListener('click', () => {
   const selected = destinations[destination];
   const photo = photos[selected.id];
   scenePhoto.src = selected.image;
@@ -894,39 +862,8 @@ function openScenicPhoto() {
   photoPan.value = '50';
   panPhoto();
   $('#open-ergun-from-photo').hidden = selected.id !== 'grassland';
-  $('#tour-from-photo').hidden = !scenicTours[selected.id];
   showScene(photo.label, '实景照片', false);
-  photoPan.focus({ preventScroll: true });
-}
-
-function openScenicTour() {
-  const selected = destinations[destination];
-  const tour = scenicTours[selected.id];
-  if (!tour) return;
-  clearScenicTour();
-  showScene(tour.title, '360°全景漫游', false);
-  $('#photo-window').hidden = true;
-  $('#photo-controls').hidden = true;
-  const frame = document.createElement('iframe');
-  frame.id = 'scenic-tour-player';
-  frame.title = tour.title;
-  frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
-  frame.setAttribute('allow', 'fullscreen; gyroscope; accelerometer');
-  frame.allowFullscreen = true;
-  frame.src = `https://www.720yun.com/t/${tour.id}`;
-  const host = $('#scenic-tour');
-  host.hidden = false;
-  host.append(frame);
-  $('#tour-controls').hidden = false;
-  $('#tour-credit').textContent = `720 云 · ${tour.author}。播放器可能显示广告或访问提示。`;
-  $('#tour-credit').hidden = false;
-  $('#tour-back').focus({ preventScroll: true });
-}
-
-$('#expand-scene').addEventListener('click', openScenicPhoto);
-$('#open-scenic-tour').addEventListener('click', openScenicTour);
-$('#tour-from-photo').addEventListener('click', openScenicTour);
-$('#tour-back').addEventListener('click', openScenicPhoto);
+});
 
 function showPanoramaError() {
   panoramaStatus.hidden = false;
@@ -988,7 +925,6 @@ $('#reset-panorama').addEventListener('click', () => {
 });
 sceneDialog.addEventListener('close', () => {
   sceneRevision++;
-  clearScenicTour();
   stopFollowingDrag();
   viewer?.destroy();
   viewer = undefined;
