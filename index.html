@@ -314,6 +314,9 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
             <button type="button" class="scene-expand" id="expand-scene">查看实景照片 <span aria-hidden="true">↗</span></button>
           </figure>
           <div class="atlas-card-body">
+            <button class="panorama-entry" type="button" id="open-atlas-panorama">
+              <strong>360° 实拍全景</strong><span aria-hidden="true">→</span>
+            </button>
             <div id="atlas-reading">
               <h3 id="atlas-place" tabindex="-1"></h3>
               <p id="atlas-copy"></p>
@@ -357,6 +360,7 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
     <div class="panorama-controls photo-controls" id="photo-controls" hidden>
       <label for="photo-pan">左右移动照片</label>
       <input id="photo-pan" type="range" min="0" max="100" value="50">
+      <button class="panorama-entry" type="button" id="open-panorama-from-photo">查看此景点的 360° 实拍全景</button>
       <button class="panorama-entry" type="button" id="open-ergun-from-photo" hidden>
         <span>额尔古纳 · 360°实拍全景</span><span aria-hidden="true">↗</span>
       </button>
@@ -377,6 +381,7 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
       <a href="https://commons.wikimedia.org/wiki/File:额尔古纳_航拍黑山头镇梁西村与根河之全景.jpg" target="_blank" rel="noopener">原图及网页版全景</a> · Liuxingy ·
       <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> · 已缩小并转为 WebP。
     </p>
+    <p class="scene-details" id="supplied-panorama-credit" hidden>全景原图由项目方提供，网页版本经缩小并转为 WebP。</p>
   </dialog>
   <dialog id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-header"><h2 id="sources-title">内容来源与使用说明</h2><button class="close-dialog" data-close="sources-dialog" aria-label="关闭使用说明">×</button></div><div class="sources-content"><p>文化与自然知识参考以下公开资料，各主题旁也可直接查看来源。</p><ul id="source-list"></ul><h3>照片来源与授权</h3><ul id="photo-sources"></ul><h3>地图与点位来源</h3><p>边界采用<a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener">阿里云 DataV 地理小工具</a>内蒙古自治区及盟市边界数据。边界与点位使用统一的墨卡托投影。河流、沙漠和胡杨林采用标明的代表位置。</p><ul><li><a href="https://www.amap.com/place/B0J10U123W" target="_blank" rel="noopener">莫尔格勒河 · 代表点 · 浩林温都日观景区</a> · 东经 120.0892°，北纬 49.6624°</li><li><a href="https://commons.wikimedia.org/wiki/Category:Kubuqi_Desert" target="_blank" rel="noopener">库布其沙漠 · 代表点 · 库布其沙漠中段</a> · 东经 109.3170°，北纬 40.3333°</li><li><a href="https://html.rhhz.net/DSJYJ/20190603.htm" target="_blank" rel="noopener">阿尔山天池 · 阿尔山天池湖心</a> · 东经 120.4100°，北纬 47.3200°</li><li><a href="https://commons.wikimedia.org/wiki/File:内蒙古_额济纳_胡杨林的秋天_-_panoramio.jpg" target="_blank" rel="noopener">额济纳胡杨林 · 代表点 · 额济纳胡杨林照片拍摄地</a> · 东经 101.0837°，北纬 41.9666°</li><li><a href="https://www.openstreetmap.org/way/351281717" target="_blank" rel="noopener">大召寺 · 大召寺院区</a> · 东经 111.6470°，北纬 40.7987°</li><li><a href="https://whc.unesco.org/en/list/1389/maps/" target="_blank" rel="noopener">元上都遗址 · 世界遗产登记位置</a> · 东经 116.1851°，北纬 42.3580°</li></ul><h3>关于体验馆</h3><p>普通、银龄简明、青少年探索模式分别调整讲解表达。文化挑战只计算本轮实际作答成绩，刷新页面后重新开始。页面不收集身份、住址等个人资料。</p><p>景区票价、开放时间等信息请以景区最新公告为准。</p></div></dialog>
   <noscript><p class="noscript">请启用浏览器 JavaScript，使用景点地图和文化挑战。</p></noscript>
@@ -786,6 +791,8 @@ const panoramaControls = $('#panorama-controls');
 const panoramaCredit = $('#panorama-credit');
 const scenePan = $('#scene-pan');
 const initialPitch = -13;
+let initialYaw = 0;
+const panoramaHeadings = {grassland: 142, desert: 90, forest: -12, ejina: -70, dazhao: 42, xanadu: 0};
 let panoramaLibrary;
 let viewer;
 let dragFrame = 0;
@@ -821,7 +828,7 @@ function setAngle(angle) {
 
 function syncPanoramaAngle() {
   if (!viewer) return;
-  const angle = Math.round((viewer.getYaw() % 360 + 360) % 360) % 360;
+  const angle = Math.round(((viewer.getYaw() - initialYaw) % 360 + 360) % 360) % 360;
   setAngle(angle === 0 && scenePan.value === '360' ? 360 : angle);
 }
 
@@ -840,6 +847,7 @@ function showScene(title, kind, isPanorama) {
   $('#scene-kind').textContent = kind;
   panoramaView.hidden = !isPanorama;
   panoramaCredit.hidden = !isPanorama;
+  $('#supplied-panorama-credit').hidden = true;
   panoramaStatus.hidden = !isPanorama;
   panoramaControls.hidden = true;
   $('#photo-controls').hidden = isPanorama;
@@ -867,22 +875,25 @@ $('#expand-scene').addEventListener('click', () => {
 
 function showPanoramaError() {
   panoramaStatus.hidden = false;
-  panoramaStatus.textContent = '暂时无法加载互动全景。可从下方原图页面打开网页版全景。';
+  panoramaStatus.textContent = '暂时无法加载互动全景。请关闭弹窗后重试。';
   panoramaView.hidden = true;
   panoramaControls.hidden = true;
 }
 
-async function openErgunPanorama() {
+async function openPanorama({ title, image, yaw = 0, ergun = false }) {
   const revision = ++sceneRevision;
+  initialYaw = yaw;
   panoramaStatus.textContent = '正在加载全景…';
-  showScene('额尔古纳 · 黑山头镇与根河', '360°实拍全景', true);
+  showScene(title, '360°实拍全景', true);
+  panoramaCredit.hidden = !ergun;
+  $('#supplied-panorama-credit').hidden = ergun;
   sceneDialog.querySelector('.close-dialog').focus();
   try {
     await loadPanoramaLibrary();
     if (revision !== sceneRevision || !sceneDialog.open) return;
     viewer = window.pannellum.viewer(panoramaView, {
       type: 'equirectangular',
-      panorama: 'assets/ergun-360.webp',
+      panorama: image,
       autoLoad: false,
       showControls: false,
       keyboardZoom: false,
@@ -890,6 +901,7 @@ async function openErgunPanorama() {
       doubleClickZoom: false,
       friction: 1,
       pitch: initialPitch,
+      yaw: initialYaw,
       hfov: panoramaView.clientWidth < 520 ? 83 : 105
     });
     viewer.on('load', () => {
@@ -910,17 +922,32 @@ async function openErgunPanorama() {
   }
 }
 
+function openErgunPanorama() {
+  return openPanorama({ title: '额尔古纳 · 黑山头镇与根河', image: 'assets/ergun-360.webp', ergun: true });
+}
+
+function openAtlasPanorama() {
+  const id = destinations[destination].id;
+  return openPanorama({
+    title: id === 'desert' ? '库布其沙漠 · 响沙湾' : photos[id].label,
+    image: `assets/${id}-360.webp`,
+    yaw: panoramaHeadings[id]
+  });
+}
+
+$('#open-atlas-panorama').addEventListener('click', openAtlasPanorama);
+$('#open-panorama-from-photo').addEventListener('click', openAtlasPanorama);
 $('#open-ergun').addEventListener('click', openErgunPanorama);
 $('#open-ergun-from-photo').addEventListener('click', openErgunPanorama);
 
 scenePan.addEventListener('input', () => {
   if (!viewer) return;
   const angle = Number(scenePan.value);
-  viewer.setYaw(angle, false);
+  viewer.setYaw(initialYaw + angle, false);
   setAngle(angle);
 });
 $('#reset-panorama').addEventListener('click', () => {
-  viewer.lookAt(initialPitch, 0, undefined, false);
+  viewer.lookAt(initialPitch, initialYaw, undefined, false);
   setAngle(0);
 });
 sceneDialog.addEventListener('close', () => {
