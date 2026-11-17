@@ -109,11 +109,12 @@ body[data-mode=senior] .mode-preview p{font-size:16px;line-height:1.65}
 .atlas-heading p{margin:0;color:var(--ink);line-height:1.6}
 .atlas-count{flex:none;align-self:center;padding:7px 12px;border-radius:999px;border:1px solid var(--line);font-size:13px;background:var(--white);white-space:nowrap}
 .atlas-count i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#257b77;margin-right:4px}
-.atlas-layout{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(242px,1fr);gap:16px;align-items:stretch}
+.atlas-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
 .atlas-picker{min-width:0;display:flex;flex-direction:column;gap:10px}
-.atlas-stage{position:relative;isolation:isolate;aspect-ratio:920 / 640;border-radius:18px;overflow:hidden;color:#effcff;
+.atlas-stage{position:relative;isolation:isolate;display:grid;align-items:center;flex:1;border-radius:18px;overflow:hidden;color:#effcff;
   background:radial-gradient(ellipse at 75% 42%,#214d55 0%,transparent 58%),linear-gradient(145deg,#0c2b42,#0b1a2c 75%);box-shadow:inset 0 0 0 1px #b4e5f42b}
 .atlas-stage::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(#98d9e335 1px,transparent 1px),linear-gradient(90deg,#98d9e335 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(#000 70%,transparent)}
+.atlas-map-content{position:relative;aspect-ratio:920 / 640;min-width:0}
 .atlas-terrain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .atlas-shadow{transform:translateY(5px);fill:#081626;stroke:#122f3a;stroke-width:2}
 .atlas-stage-title{position:absolute;top:9%;left:7%;display:grid;gap:4px;z-index:1;pointer-events:none}
@@ -172,18 +173,23 @@ body[data-mode=senior] .atlas-card p{font-size:17px;line-height:1.65}
 .explore-nav a:hover{background:var(--tour-panel)}
 .atlas-empty{border:1px dashed var(--line);border-radius:18px;display:grid;justify-items:center;align-content:center;gap:12px;text-align:center;padding:25px;background:var(--white)}
 .atlas-empty-icon{font-size:40px;line-height:1;color:var(--ink);opacity:.6}
-.atlas-card{align-self:start;scroll-margin-top:12px}
+.atlas-card{scroll-margin-top:12px}
 .atlas-photo-frame img{aspect-ratio:16/9}
 .atlas-photo-frame .scene-expand{top:10px;right:10px;min-height:44px}
 .atlas-card-body>*,#atlas-reading{width:100%}
 .atlas-card-body .atlas-observation{background:var(--tour-panel);border-radius:8px;padding:9px 12px;font-size:14px}
 .atlas-card-body details{border-top:1px solid var(--line)}
 .atlas-card-body summary{min-height:46px;padding:10px 2px;cursor:pointer;font-weight:650}
-#mode-current{float:right;margin-left:8px;font-size:12px;font-weight:500}
-.atlas-modes .mode-group{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 12px}
-.atlas-guide dl{margin:0}
+.atlas-modes{display:flex;align-items:center;flex-wrap:wrap;gap:10px 20px;margin-bottom:24px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--tour-panel)}
+.atlas-modes h3{font-size:16px;font-weight:700}
+.atlas-modes .mode-group{flex:1;min-width:min(100%,260px);grid-template-columns:repeat(3,minmax(0,1fr));margin:0}
+.atlas-guide{margin-top:16px;padding:0 clamp(12px,2.5vw,24px);border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.atlas-guide summary{min-height:48px;padding:11px 0;cursor:pointer;font-weight:700}
+.atlas-guide dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 6px}
 .atlas-guide dl:empty{display:none}
-.atlas-guide dl div{padding:7px 0;border-bottom:1px solid var(--line)}
+.atlas-guide dl div{padding:10px 14px;border-radius:8px;background:var(--tour-panel)}
+.atlas-guide dl div:nth-child(3){grid-column:1/-1}
+@media(max-width:540px){.atlas-guide dl{grid-template-columns:1fr}.atlas-modes{padding:10px}.atlas-modes .mode-group button{padding-inline:6px}}
 .atlas-guide dt{font-size:13px;font-weight:700}
 .atlas-guide dd{margin:3px 0;color:var(--ink);font-size:14px;line-height:1.65}
 body[data-mode=senior] .atlas-guide dd,body[data-mode=senior] .atlas-card-body .atlas-observation{font-size:17px}
@@ -267,12 +273,21 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
       <a class="ai-link" target="_blank" rel="noopener">问蒙益行 <span aria-hidden="true">↗</span></a>
     </nav>
     <section class="section atlas" id="atlas" aria-labelledby="atlas-title">
+      <div class="atlas-modes" aria-labelledby="atlas-mode-title">
+        <h3 id="atlas-mode-title">讲解方式</h3>
+        <div class="mode-group" role="group" aria-label="选择讲解方式">
+          <button type="button" data-mode="normal" aria-pressed="true"><strong>普通导览</strong><span>图文讲解</span></button>
+          <button type="button" data-mode="senior" aria-pressed="false"><strong>银龄简明</strong><span>大字短句</span></button>
+          <button type="button" data-mode="youth" aria-pressed="false"><strong>青少年探索</strong><span>趣味观察</span></button>
+        </div>
+      </div>
       <div class="atlas-heading">
         <div><h2 id="atlas-title" tabindex="-1">点亮内蒙古</h2><p>点一个景点，看实景照片，读当地的故事。</p></div>
       </div>
       <div class="atlas-layout">
         <div class="atlas-picker">
           <div class="atlas-stage">
+            <div class="atlas-map-content">
             <div class="atlas-stage-title" aria-hidden="true"><strong>内蒙古</strong><span>从大漠到林海</span></div>
             <div class="atlas-compass" aria-hidden="true"><span>北</span><i></i></div>
             <svg class="atlas-terrain" viewBox="0 0 920 640" aria-hidden="true">
@@ -298,6 +313,7 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
             </svg>
             <div id="atlas-markers" role="group" aria-label="地图景点"></div>
             <small class="atlas-map-note">内蒙古自治区 · 景点导览</small>
+            </div>
           </div>
           <div class="atlas-choices" id="atlas-choices" role="group" aria-label="按名称选择景点"></div>
         </div>
@@ -320,20 +336,6 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
               <p id="atlas-copy"></p>
               <p class="atlas-observation" id="atlas-observation"></p>
             </div>
-            <details class="atlas-modes">
-              <summary>讲解方式 <span id="mode-current">普通导览</span></summary>
-              <div class="mode-group" role="group" aria-label="选择讲解方式">
-                <button type="button" data-mode="normal" aria-pressed="true"><strong>普通导览</strong><span>图文讲解</span></button>
-                <button type="button" data-mode="senior" aria-pressed="false"><strong>银龄简明</strong><span>大字短句</span></button>
-                <button type="button" data-mode="youth" aria-pressed="false"><strong>青少年探索</strong><span>趣味观察</span></button>
-              </div>
-            </details>
-            <details id="atlas-guide" class="atlas-guide">
-              <summary>游玩攻略</summary>
-              <p id="atlas-guide-status" role="status" hidden></p>
-              <dl id="atlas-guide-content"></dl>
-              <a id="atlas-guide-link">查看完整攻略 <span aria-hidden="true">→</span></a>
-            </details>
             <div class="atlas-actions">
               <a href="#atlas" id="atlas-back">返回地图</a>
               <button type="button" id="atlas-next">下一站 <span aria-hidden="true">→</span></button>
@@ -343,6 +345,12 @@ body:has(#quiz-card[hidden]) .challenge-section{grid-template-columns:1fr}
           </div>
         </article>
       </div>
+      <details id="atlas-guide" class="atlas-guide" hidden>
+        <summary>游玩攻略</summary>
+        <p id="atlas-guide-status" role="status" hidden></p>
+        <dl id="atlas-guide-content"></dl>
+        <a id="atlas-guide-link">查看完整攻略 <span aria-hidden="true">→</span></a>
+      </details>
       <span class="mode-status" id="mode-status" role="status"></span>
     </section>
     <section class="heritage section" id="heritage" aria-labelledby="heritage-title"><div class="section-heading"><div><h2 id="heritage-title">非遗故事</h2></div><p>走近声音与手艺，<br>看见文化如何被记住、被传承。</p></div><div class="heritage-layout"><figure class="heritage-art"><img src="assets/morin-khuur.webp" width="960" height="640" alt="内蒙古博物院展出的马头琴" loading="lazy"><figcaption class="art-note">内蒙古博物院 · 马头琴</figcaption></figure><div class="heritage-details"><div class="heritage-tabs" id="heritage-tabs" role="group" aria-label="选择非遗主题"></div><article class="heritage-copy" aria-live="polite"><span class="small-label" id="heritage-category"></span><h3 id="heritage-copy-title"></h3><p class="reading" id="heritage-text"></p><details id="heritage-more"><summary>再多了解一点 <span aria-hidden="true">+</span></summary><p id="heritage-detail"></p></details><a id="heritage-source" class="source-link" target="_blank" rel="noopener"></a><a class="text-action ai-link" target="_blank" rel="noopener">问蒙益行 <span aria-hidden="true">↗</span></a></article></div></div></section>
@@ -644,6 +652,7 @@ function selectAtlasPoint(index, focusCard = true) {
   }
   $('#atlas-empty').hidden = true;
   $('#journey').hidden = false;
+  guidePanel.hidden = false;
   renderAtlas();
   const pin = atlasPins[index];
   pin.querySelector('.atlas-pulse')?.remove();
@@ -716,7 +725,6 @@ heritage.forEach((h,i)=>{const b=document.createElement('button');b.type='button
 function applyReadingMode(selected){
   mode=selected;
   document.body.dataset.mode=mode;
-  $('#mode-current').textContent = readingModes[mode];
   $('#mode-status').textContent = `已选择${readingModes[mode]}`;
   modeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
   if (destination !== null) renderAtlas();
