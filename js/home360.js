@@ -46,17 +46,21 @@
       setAngle(v);
     }
     function loadSource(item, cb) {
-      if (item.src) return cb(item.src);
+      /* file:// 下浏览器会把本地图片当成跨域，WebGL 读不了；
+         所以离线双击时退回 data URL 版全景（js/pano-src-*.js），线上仍然用高清 jpg。 */
+      const fileMode = location.protocol === 'file:';
+      if (item.src && !fileMode) return cb(item.src);
       const cached = window.PANO_SOURCES && window.PANO_SOURCES[item.key];
-      if (cached) { item.src = cached; return cb(cached); }
+      if (cached) return cb(cached);
       const key = item.key;
       const s = document.createElement('script');
       s.src = 'js/pano-src-' + key + '.js';
       s.onload = function () {
-        item.src = (window.PANO_SOURCES || {})[key] || null;
-        cb(item.src);
+        const data = (window.PANO_SOURCES || {})[key] || null;
+        if (data) return cb(data);
+        cb(fileMode ? item.src : null);
       };
-      s.onerror = function () { cb(null); };
+      s.onerror = function () { cb(fileMode ? item.src : null); };
       document.head.appendChild(s);
     }
 
@@ -209,7 +213,7 @@
         ctl.resize(stage.clientWidth, stage.clientHeight);
         ctl.setPitch(0);
         apply();
-        if (item.thumb) ctl.setSource(item.thumb);
+        if (item.thumb && location.protocol !== 'file:') ctl.setSource(item.thumb);
         loadSource(item, function (src) {
           if (index !== myIndex) return;
           if (!src) {
@@ -217,7 +221,8 @@
             return;
           }
           ctl.setSource(src);
-          if (note) note.textContent = item.city + ' · ' + item.name + ' · 高清球面全景 · 左右拖动环视';
+          const offline = location.protocol === 'file:';
+          if (note) note.textContent = item.city + ' · ' + item.name + ' · ' + (offline ? '离线全景 · 左右拖动环视' : '高清球面全景 · 左右拖动环视');
         });
         const closeBtn = modal.querySelector('.pano-home-close');
         if (closeBtn) closeBtn.focus();
