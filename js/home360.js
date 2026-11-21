@@ -209,6 +209,7 @@
         ctl.resize(stage.clientWidth, stage.clientHeight);
         ctl.setPitch(0);
         apply();
+        if (item.thumb) ctl.setSource(item.thumb);
         loadSource(item, function (src) {
           if (index !== myIndex) return;
           if (!src) {
@@ -216,7 +217,7 @@
             return;
           }
           ctl.setSource(src);
-          if (note) note.textContent = item.city + ' · ' + item.name + ' · 真实球面全景 · 素材来源 360Cities';
+          if (note) note.textContent = item.city + ' · ' + item.name + ' · 高清球面全景 · 左右拖动环视';
         });
         const closeBtn = modal.querySelector('.pano-home-close');
         if (closeBtn) closeBtn.focus();

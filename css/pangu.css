@@ -1737,3 +1737,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .schedule-row b { font-size: 14px; }
   .schedule-row p { font-size: 10.5px; }
 }
+
+/* 360 pano: enable drag on touch devices */
+.pano-home-stage, .pano-home-stage canvas, .pano360, .pano360 canvas { touch-action: none; }
+.pano-home-stage canvas { background: #0b1a12; }

@@ -38,6 +38,10 @@
     return s;
   }
 
+  function isPOT(n) {
+    return n > 0 && (n & (n - 1)) === 0;
+  }
+
   function create(canvas) {
     const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
     if (!gl) return null;
@@ -60,16 +64,14 @@
 
     const tex = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-    let ready = false, yaw = 0, pitch = 0, aspect = 1;
+    let ready = false, yaw = 0, pitch = 0, aspect = 1, seq = 0;
 
     function draw() {
       gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.clearColor(0.28, 0.48, 0.67, 1);
+      gl.clearColor(0.09, 0.16, 0.12, 1);
       gl.clear(gl.COLOR_BUFFER_BIT);
       if (!ready) return;
       gl.useProgram(program);
@@ -80,19 +82,40 @@
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
 
+    /* 支持「先低清后超清」：后发起的加载会覆盖先前的，避免缩略图把高清图顶掉 */
     function setSource(src) {
       if (!src) return;
-      ready = false;
+      const my = ++seq;
       const image = new Image();
+      image.decoding = 'async';
       image.onload = function () {
+        if (my !== seq) return;
         try {
+          const pot = isPOT(image.width) && isPOT(image.height);
+          gl.bindTexture(gl.TEXTURE_2D, tex);
           gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+          gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, pot ? gl.REPEAT : gl.CLAMP_TO_EDGE);
+          if (pot) {
+            gl.generateMipmap(gl.TEXTURE_2D);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+          } else {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          }
           ready = true;
           draw();
         } catch (e) {
-          ready = false;
+          if (my !== seq) return;
+          window.__panoDiag = { error: String(e && e.message || e), w: image.width, h: image.height };
+          if (window.console && console.warn) console.warn('[pano] texture upload failed:', e);
+          draw();
         }
+      };
+      image.onerror = function () {
+        if (my !== seq) return;
+        window.__panoDiag = { error: 'image load failed', src: src };
+        if (window.console && console.warn) console.warn('[pano] image load failed:', src);
       };
       image.src = src;
     }
@@ -100,8 +123,9 @@
     return {
       resize(w, h) {
         if (!w || !h) return;
-        canvas.width = Math.max(2, Math.round(w));
-        canvas.height = Math.max(2, Math.round(h));
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        canvas.width = Math.max(2, Math.round(w * dpr));
+        canvas.height = Math.max(2, Math.round(h * dpr));
         canvas.style.width = w + 'px';
         canvas.style.height = h + 'px';
         aspect = canvas.width / canvas.height;
