@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="点击内蒙古十二盟市地图，进入呼和浩特、包头、呼伦贝尔、阿拉善等城市页，查看景点、非遗与研学路线。">
+<meta name="theme-color" content="#0a1610">
+<title>城市地图 · 内蒙古十二盟市 | 蒙益行</title>
+<link rel="icon" href="assets/img/mengyixing-avatar.png">
+<link rel="stylesheet" href="css/pangu.css">
+</head>
+<body data-page="map" id="top">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="蒙益行教育平台首页">
+      <span class="brand-mark"><img src="assets/img/mengyixing-avatar.png" alt="蒙益行吉祥物头像"></span>
+      <span class="brand-text">
+        <h1>蒙益行</h1>
+        <p>MENGYIXING · 智游内蒙古</p>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="主导航"><a href="index.html" class="nav-link">首页</a><a href="map.html" class="nav-link active">城市地图</a><a href="index.html#cities" class="nav-link">十二城</a><a href="index.html#ecology" class="nav-link">生态北疆</a><a href="index.html#heritage" class="nav-link">非遗图谱</a><a href="index.html#routes" class="nav-link">研学路线</a></nav>
+    <div class="nav-cta">
+      <a href="map.html" class="btn">打开地图 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">首页<span>01</span></a><a href="map.html">城市地图<span>02</span></a><a href="index.html#cities">十二城<span>03</span></a><a href="index.html#ecology">生态北疆<span>04</span></a><a href="index.html#heritage">非遗图谱<span>05</span></a><a href="index.html#routes">研学路线<span>06</span></a>
+  <p class="menu-note">蒙益行 / 内蒙古十二盟市数字志</p>
+</div>
+<main id="main" class="map-page">
+  <div class="map-page-inner">
+    <aside class="map-side">
+      <span class="eyebrow">ATLAS · 12</span>
+      <h1>内蒙古<br>十二盟市地图</h1>
+      <p class="side-sub">点击地图上的任意盟市，或从下方列表进入城市。滚轮缩放、拖拽平移，找到你想去的那一块。</p>
+      <div class="map-search">
+        <input id="mapSearchInput" type="search" placeholder="搜索城市 / 别名 / 英文" aria-label="搜索城市">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      </div>
+      <div class="city-list" id="cityList"></div>
+      <p class="map-side-foot">地图边界基于公开地理数据简化绘制，仅用于教学展示。<br>MENGYIXING · 2026</p>
+    </aside>
+    <div class="map-canvas" id="mapCanvas">
+      <div class="map-grid"></div>
+      <div class="map-badge"><span class="dot"></span>点击盟市进入城市志</div>
+      <div class="map-svg-wrap" id="mapSvgWrap"><div id="fullMapSvg" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"></div></div>
+      <div class="map-toolbar" aria-label="地图缩放">
+        <button class="map-tool-btn" id="zoomIn" aria-label="放大">+</button>
+        <button class="map-tool-btn" id="zoomLevel" aria-live="polite" style="font-size:9px;pointer-events:none">100%</button>
+        <button class="map-tool-btn" id="zoomOut" aria-label="缩小">−</button>
+        <button class="map-tool-btn" id="zoomReset" aria-label="重置视图"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 5.3-5.3 2.2 2.2-5.3z"/></svg></button>
+      </div>
+      <div class="map-tooltip" id="mapTooltip"></div>
+      <div class="map-detail" id="mapDetail" hidden>
+        <div class="map-detail-media"><img id="mapDetailImg" src="assets/img/hohhot-dazhao.webp" alt=""></div>
+        <div class="map-detail-body">
+          <span class="idx" id="mapDetailNum">01 / 12</span>
+          <h3 id="mapDetailName">呼和浩特市</h3>
+          <p id="mapDetailDesc">青城召庙，乳都新风</p>
+          <a class="go" id="mapDetailLink" href="cities/hohhot.html">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <div class="map-legend">
+        <span><i style="background:#214f3d"></i>草原 / 综合</span>
+        <span><i style="background:#c9a15e"></i>当前选择</span>
+        <span><i style="background:#e3c98f"></i>自治区首府</span>
+      </div>
+      <span class="map-hint">DRAG · ZOOM · EXPLORE</span>
+    </div>
+  </div>
+</main>
+
+<div class="guide">
+  <div class="guide-panel" id="guidePanel">
+    <div class="gp-head">
+      <img src="assets/img/mengyixing.png" alt="蒙益行">
+      <div><b>蒙益行小助手</b><span>MENGYIXING GUIDE</span></div>
+    </div>
+    <p>我是蒙益行。先点地图选一座城，或者让我直接带你去看看。</p>
+    <div class="guide-links"><a href="map.html">打开城市地图<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="index.html#cities">十二城速览<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="index.html#heritage">非遗图谱<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="index.html#learn">知识小测<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+  <button class="guide-toggle" id="guideToggle" aria-label="打开蒙益行小助手" aria-expanded="false" aria-controls="guidePanel">
+    <img src="assets/img/mengyixing.png" alt="">
+  </button>
+</div>
+
+<div class="modal" id="panguModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" data-close aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-media">
+      <img id="modalImg" src="assets/img/home-hero.webp" alt="">
+      <div class="modal-media-text">
+        <div class="cat" id="modalCat"></div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalSub"></p>
+      </div>
+    </div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+<script src="js/map-data.js"></script>
+<script src="js/pangu.js"></script>
+</body>
+</html>

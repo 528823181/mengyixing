@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="以内蒙古十二盟市为坐标，探索草原、荒漠、森林、湿地与黄河，认识景点、非遗与生态的北疆数字教育平台。">
+<meta name="theme-color" content="#0a1610">
+<title>蒙益行 | 智游内蒙古</title>
+<link rel="icon" href="assets/img/mengyixing-avatar.png">
+<link rel="stylesheet" href="css/pangu.css">
+</head>
+<body data-page="home" id="top">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="蒙益行教育平台首页">
+      <span class="brand-mark"><img src="assets/img/mengyixing-avatar.png" alt="蒙益行吉祥物头像"></span>
+      <span class="brand-text">
+        <h1>蒙益行</h1>
+        <p>MENGYIXING · 智游内蒙古</p>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="主导航"><a href="index.html" class="nav-link active">首页</a><a href="map.html" class="nav-link">城市地图</a><a href="index.html#cities" class="nav-link">十二城</a><a href="index.html#ecology" class="nav-link">生态北疆</a><a href="index.html#heritage" class="nav-link">非遗图谱</a><a href="index.html#panorama" class="nav-link">360°全景</a><a href="hall.html" class="nav-link">3D展厅</a><a href="index.html#routes" class="nav-link">研学路线</a></nav>
+    <div class="nav-cta">
+      <a href="map.html" class="btn">打开地图 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">首页<span>01</span></a><a href="map.html">城市地图<span>02</span></a><a href="index.html#cities">十二城<span>03</span></a><a href="index.html#ecology">生态北疆<span>04</span></a><a href="index.html#heritage">非遗图谱<span>05</span></a><a href="index.html#panorama">360°全景<span>06</span></a><a href="hall.html">3D展厅<span>07</span></a><a href="index.html#routes">研学路线<span>08</span></a>
+  <p class="menu-note">蒙益行 / 内蒙古十二盟市数字志</p>
+</div>
+<main id="main">
+  <section class="hero">
+    <div class="hero-media"><img src="assets/img/home-hero.webp" alt="内蒙古草原与河流航拍"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-inner">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-kicker"><span class="pulse"></span>智游内蒙古 · 十二盟市数字志</div>
+            <h1>
+              <span class="line"><span> 蒙益行</span></span>
+              <span class="line"><span>智游<em>内蒙古</em></span></span>
+            </h1>
+            <p class="hero-sub">从呼伦贝尔的草浪到额济纳的胡杨，从长调呼麦到马头琴的颤音。<strong>十二座城，十二种北疆。</strong>点开地图，选择你的第一站。</p>
+            <div class="hero-actions">
+              <a class="btn" href="#map">打开城市地图 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="btn btn-ghost" href="#ecology">认识北疆生态</a>
+            </div>
+            <div class="hero-meta">
+              <div class="hero-stat"><b>12</b><span>盟市全覆盖</span></div>
+              <div class="hero-stat"><b data-count="261" data-suffix="">261</b><span>必游点位</span></div>
+              <div class="hero-stat"><b data-count="36" data-suffix="">36</b><span>非遗讲解</span></div>
+              <div class="hero-stat"><b>6</b><span>类生态系统</span></div>
+            </div>
+          </div>
+          <div class="mascot">
+            <div class="mascot-halo"></div>
+            <img class="mascot-img mascot-gif" id="mascotOpen" src="assets/img/mengyixing-guide.gif" alt="蒙益行吉祥物动画，点击互动" width="320" height="568" role="button" tabindex="0" aria-label="和蒙益行互动">
+            <div class="mascot-bubble"><b>我是蒙益行</b>点开地图，我们从青城出发。每一座城，都有一条自己的北疆叙事。<button class="mascot-chat" type="button" id="mascotHint">点我聊聊 →</button></div>
+            <div class="mascot-tag">MENGYIXING · 北疆向导</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="hero-side-note">MENGYIXING · INNER MONGOLIA</span>
+    <span class="hero-scroll">SCROLL</span>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>呼伦贝尔草原</span><span>额济纳胡杨</span><span>巴丹吉林沙山</span><span>元上都遗址</span><span>成吉思汗陵</span><span>阿斯哈图石林</span><span>乌梁素海</span><span>阿尔山天池</span><span>长调与呼麦</span><span>那达慕</span>
+      <span>呼伦贝尔草原</span><span>额济纳胡杨</span><span>巴丹吉林沙山</span><span>元上都遗址</span><span>成吉思汗陵</span><span>阿斯哈图石林</span><span>乌梁素海</span><span>阿尔山天池</span><span>长调与呼麦</span><span>那达慕</span>
+    </div>
+  </div>
+
+  <section class="section map-section" id="map">
+    <div class="container">
+      <div class="map-layout">
+        <div class="map-copy reveal">
+          <span class="eyebrow">INTERACTIVE ATLAS</span>
+          <h2>点击一座城，<br>打开它的<em>北疆叙事</em></h2>
+          <p>十二个盟市，十二块拼图。把鼠标停在任意一块上，先看它的面孔；点下去，就进入那座城的景点、非遗、风物与路线。</p>
+          <div class="map-preview" id="mapPreview">
+            <div class="map-preview-media"><img id="previewImg" src="assets/img/hohhot-dazhao.webp" alt="呼和浩特城市风光"></div>
+            <div class="map-preview-body">
+              <span class="idx" id="previewNum">01 / 12 · 青城</span>
+              <h3 id="previewName">呼和浩特市</h3>
+              <p class="tagline" id="previewTagline">青城召庙，乳都新风</p>
+              <span class="mini-tags" id="previewTags"><span>召庙之城</span><span>中国乳都</span><span>草原都市</span></span>
+              <span class="enter">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <a class="map-preview-link" id="previewLink" href="cities/hohhot.html" aria-label="进入呼和浩特市"></a>
+          </div>
+          <div class="map-chips"><button type="button" class="map-chip" data-city="hohhot">呼和浩特</button><button type="button" class="map-chip" data-city="baotou">包头</button><button type="button" class="map-chip" data-city="wuhai">乌海</button><button type="button" class="map-chip" data-city="chifeng">赤峰</button><button type="button" class="map-chip" data-city="tongliao">通辽</button><button type="button" class="map-chip" data-city="ordos">鄂尔多斯</button><button type="button" class="map-chip" data-city="hulunbuir">呼伦贝尔</button><button type="button" class="map-chip" data-city="bayannur">巴彦淖尔</button><button type="button" class="map-chip" data-city="ulanqab">乌兰察布</button><button type="button" class="map-chip" data-city="hinggan">兴安盟</button><button type="button" class="map-chip" data-city="xilingol">锡林郭勒</button><button type="button" class="map-chip" data-city="alxa">阿拉善</button></div>
+          <div style="margin-top:26px"><a class="text-link" href="map.html">进入完整地图 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+        <div class="map-stage reveal reveal-d1">
+          <div class="map-svg" id="homeMapSvg" aria-label="内蒙古十二盟市地图"></div>
+          <svg class="map-compass" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+            <circle cx="30" cy="30" r="22" stroke="rgba(227,201,143,.6)" stroke-width="1"/>
+            <path d="M30 8v6M30 46v6M8 30h6M46 30h6" stroke="rgba(227,201,143,.6)" stroke-width="1"/>
+            <path d="M30 17l5 13-5 13-5-13z" stroke="rgba(227,201,143,.8)" stroke-width="1"/>
+          </svg>
+          <span class="map-note">NM · 97°E—126°E / 37°N—53°N</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cities">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="title-wrap">
+          <span class="eyebrow">TWELVE CITIES</span>
+          <h2>十二城，十二种辽阔</h2>
+          <p>从东部草原到西部荒漠，从边境口岸到黄河几字弯。每一座城都有自己的地理、味道与手艺。</p>
+        </div>
+        <a class="text-link head-link" href="map.html">在地图上查看 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="city-grid">
+      <a class="city-card reveal reveal-d0" href="cities/hohhot.html" aria-label="进入呼和浩特市">
+        <img src="assets/img/hohhot-dazhao.webp" alt="呼和浩特青城召庙，乳都新风" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">01 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>呼和浩特</h3>
+          <span class="en">HOHHOT</span>
+          <p>青城召庙，乳都新风</p>
+          <span class="tags"><span>召庙之城</span><span>中国乳都</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d1" href="cities/baotou.html" aria-label="进入包头市">
+        <img src="assets/img/baotou-wudangzhao.webp" alt="包头草原钢城，鹿鸣黄河" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">02 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>包头</h3>
+          <span class="en">BAOTOU</span>
+          <p>草原钢城，鹿鸣黄河</p>
+          <span class="tags"><span>草原钢城</span><span>稀土之都</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d2" href="cities/wuhai.html" aria-label="进入乌海市">
+        <img src="assets/img/wuhai-wuhaihu.webp" alt="乌海大漠湖城，葡萄与岩画" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">03 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>乌海</h3>
+          <span class="en">WUHAI</span>
+          <p>大漠湖城，葡萄与岩画</p>
+          <span class="tags"><span>大漠湖城</span><span>书法之城</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d3" href="cities/chifeng.html" aria-label="进入赤峰市">
+        <img src="assets/img/chifeng-ashatu.webp" alt="赤峰红山玉龙，石林草原" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">04 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>赤峰</h3>
+          <span class="en">CHIFENG</span>
+          <p>红山玉龙，石林草原</p>
+          <span class="tags"><span>红山文化</span><span>克什克腾</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d0" href="cities/tongliao.html" aria-label="进入通辽市">
+        <img src="assets/img/tongliao-daqinggou.webp" alt="通辽科尔沁叙事，安代与版画" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">05 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>通辽</h3>
+          <span class="en">TONGLIAO</span>
+          <p>科尔沁叙事，安代与版画</p>
+          <span class="tags"><span>科尔沁草原</span><span>孝庄故里</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d1" href="cities/ordos.html" aria-label="进入鄂尔多斯市">
+        <img src="assets/img/ordos-chengling.webp" alt="鄂尔多斯黄河几字弯，沙海与圣陵" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">06 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>鄂尔多斯</h3>
+          <span class="en">ORDOS</span>
+          <p>黄河几字弯，沙海与圣陵</p>
+          <span class="tags"><span>成吉思汗陵</span><span>黄河几字弯</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d2" href="cities/hulunbuir.html" aria-label="进入呼伦贝尔市">
+        <img src="assets/img/hulunbuir-moergele.webp" alt="呼伦贝尔天下第一曲水，北国碧玉" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">07 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>呼伦贝尔</h3>
+          <span class="en">HULUNBUIR</span>
+          <p>天下第一曲水，北国碧玉</p>
+          <span class="tags"><span>中国最美草原</span><span>使鹿部落</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d3" href="cities/bayannur.html" aria-label="进入巴彦淖尔市">
+        <img src="assets/img/bayannur-wuliangsuhai.webp" alt="巴彦淖尔河套平原，乌梁素海" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">08 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>巴彦淖尔</h3>
+          <span class="en">BAYANNUR</span>
+          <p>河套平原，乌梁素海</p>
+          <span class="tags"><span>河套平原</span><span>乌梁素海</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d0" href="cities/ulanqab.html" aria-label="进入乌兰察布市">
+        <img src="assets/img/ulanqab-huoshan.webp" alt="乌兰察布火山草原，薯都云谷" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">09 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>乌兰察布</h3>
+          <span class="en">ULANQAB</span>
+          <p>火山草原，薯都云谷</p>
+          <span class="tags"><span>火山草原</span><span>中国薯都</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d1" href="cities/hinggan.html" aria-label="进入兴安盟">
+        <img src="assets/img/hinggan-tianchi.webp" alt="兴安盟兴安岭上，阿尔山泉" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">10 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>兴安盟</h3>
+          <span class="en">HINGGAN</span>
+          <p>兴安岭上，阿尔山泉</p>
+          <span class="tags"><span>阿尔山</span><span>火山森林</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d2" href="cities/xilingol.html" aria-label="进入锡林郭勒盟">
+        <img src="assets/img/xilingol-yuanshangdu.webp" alt="锡林郭勒典型草原，元上都与马" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">11 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>锡林郭勒</h3>
+          <span class="en">XILINGOL</span>
+          <p>典型草原，元上都与马</p>
+          <span class="tags"><span>典型草原</span><span>元上都</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+      <a class="city-card reveal reveal-d3" href="cities/alxa.html" aria-label="进入阿拉善盟">
+        <img src="assets/img/alxa-ejina.webp" alt="阿拉善胡杨、沙山与苍天" loading="lazy">
+        <span class="city-card-top"><span class="city-card-num">12 / 12</span><span class="city-card-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        <span class="city-card-body">
+          <h3>阿拉善</h3>
+          <span class="en">ALXA</span>
+          <p>胡杨、沙山与苍天</p>
+          <span class="tags"><span>额济纳胡杨</span><span>巴丹吉林</span></span>
+          <span class="go">进入城市 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a></div>
+    </div>
+  </section>
+
+  <section class="section pano-home" id="panorama">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="title-wrap">
+          <span class="eyebrow">360° PANORAMA</span>
+          <h2>把头转过去，<br>看北疆的<em>四周</em></h2>
+          <p>10 个真实球面全景。左右拖动画面，抬头看天，低头看地。</p>
+        </div>
+        <span class="pano-count">10 PANORAMAS<br>5 CITIES</span>
+      </div>
+      <div class="pano-grid">
+        <button class="pano-card reveal" type="button" data-pano="0" aria-label="打开呼和浩特大召寺360度全景">
+          <img src="assets/img/360/thumb-hohhot-dazhao.webp" alt="呼和浩特大召寺360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">呼和浩特 · HOHHOT</span>
+            <h3>大召寺</h3>
+            <span class="pano-card-sub">召庙金顶，青城香火</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="1" aria-label="打开呼和浩特席力图召360度全景">
+          <img src="assets/img/360/thumb-hohhot-xilituzhao.webp" alt="呼和浩特席力图召360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">呼和浩特 · HOHHOT</span>
+            <h3>席力图召</h3>
+            <span class="pano-card-sub">银佛殿前的转经声</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="2" aria-label="打开赤峰达里诺尔湖360度全景">
+          <img src="assets/img/360/thumb-chifeng-dalinuoer.webp" alt="赤峰达里诺尔湖360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">赤峰 · CHIFENG</span>
+            <h3>达里诺尔湖</h3>
+            <span class="pano-card-sub">湖与湿地的边界</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="3" aria-label="打开赤峰阿斯哈图石林360度全景">
+          <img src="assets/img/360/thumb-chifeng-ashatu.webp" alt="赤峰阿斯哈图石林360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">赤峰 · CHIFENG</span>
+            <h3>阿斯哈图石林</h3>
+            <span class="pano-card-sub">冰川刻出的石阵</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="4" aria-label="打开鄂尔多斯响沙湾360度全景">
+          <img src="assets/img/360/thumb-ordos-xiangshawan.webp" alt="鄂尔多斯响沙湾360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">鄂尔多斯 · ORDOS</span>
+            <h3>响沙湾</h3>
+            <span class="pano-card-sub">会唱歌的沙丘</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="5" aria-label="打开鄂尔多斯成吉思汗陵360度全景">
+          <img src="assets/img/360/thumb-ordos-chengling.webp" alt="鄂尔多斯成吉思汗陵360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">鄂尔多斯 · ORDOS</span>
+            <h3>成吉思汗陵</h3>
+            <span class="pano-card-sub">八白室的苍穹</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="6" aria-label="打开呼伦贝尔呼伦湖360度全景">
+          <img src="assets/img/360/thumb-hulunbuir-hulunhu.webp" alt="呼伦贝尔呼伦湖360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">呼伦贝尔 · HULUNBUIR</span>
+            <h3>呼伦湖</h3>
+            <span class="pano-card-sub">北方大泽</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="7" aria-label="打开呼伦贝尔莫尔格勒河360度全景">
+          <img src="assets/img/360/thumb-hulunbuir-moergele.webp" alt="呼伦贝尔莫尔格勒河360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">呼伦贝尔 · HULUNBUIR</span>
+            <h3>莫尔格勒河</h3>
+            <span class="pano-card-sub">天下第一曲水</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="8" aria-label="打开呼伦贝尔白桦林360度全景">
+          <img src="assets/img/360/thumb-hulunbuir-baihualin.webp" alt="呼伦贝尔白桦林360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">呼伦贝尔 · HULUNBUIR</span>
+            <h3>白桦林</h3>
+            <span class="pano-card-sub">白干绿叶的森林</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+        <button class="pano-card reveal" type="button" data-pano="9" aria-label="打开阿拉善额济纳胡杨林360度全景">
+          <img src="assets/img/360/thumb-alxa-ejina.webp" alt="阿拉善额济纳胡杨林360度全景" loading="lazy">
+          <span class="pano-card-badge">360°</span>
+          <span class="pano-card-body">
+            <span class="pano-card-city">阿拉善 · ALXA</span>
+            <h3>额济纳胡杨林</h3>
+            <span class="pano-card-sub">三千年的金色</span>
+            <span class="pano-card-go">拖动进入全景 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </button>
+      </div>
+      <div class="vr-passport-bar reveal">
+        <div class="vr-passport-id"><span>VR PASSPORT</span><b><span id="vrPassportCount">0</span> / 10 已盖章</b></div>
+        <div class="vr-passport-cta"><span>打开一个全景就盖一枚章</span><button class="text-link" type="button" id="vrPassportOpen">查看护照 →</button><a class="text-link" href="hall.html">进入 3D 展厅 →</a></div>
+      </div>
+      <p class="pano-source">全景素材来源 360Cities · 仅用于教学展示</p>
+    </div>
+  </section>
+
+  <section class="section section-paper" id="ecology">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="title-wrap">
+          <span class="eyebrow">ECOLOGY OF THE NORTH</span>
+          <h2>北疆的六种底色</h2>
+          <p>草原、荒漠、森林、湿地、黄河与物种，共同构成中国北方最重要的生态安全屏障。</p>
+        </div>
+        <a class="text-link head-link" href="map.html">按生态类型探索 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="eco-grid">
+      <a class="eco-card reveal reveal-d0" href="cities/hulunbuir.html">
+        <img src="assets/img/hulunbuir-moergele.webp" alt="草原生态" loading="lazy">
+        <span class="eco-idx">01</span>
+        <h3>草原生态</h3>
+        <p>草浪、河曲与游牧节律</p>
+        <span class="eco-link">进入讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="eco-card reveal reveal-d1" href="cities/alxa.html">
+        <img src="assets/img/alxa-badanjilin.webp" alt="荒漠与沙地" loading="lazy">
+        <span class="eco-idx">02</span>
+        <h3>荒漠与沙地</h3>
+        <p>沙山、湖泊与治沙智慧</p>
+        <span class="eco-link">进入讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="eco-card reveal reveal-d2" href="cities/hinggan.html">
+        <img src="assets/img/hinggan-shitanglin.webp" alt="森林生态" loading="lazy">
+        <span class="eco-idx">03</span>
+        <h3>森林生态</h3>
+        <p>大兴安岭的绿色屏障</p>
+        <span class="eco-link">进入讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="eco-card reveal reveal-d0" href="cities/bayannur.html">
+        <img src="assets/img/bayannur-wuliangsuhai.webp" alt="湿地与湖泊" loading="lazy">
+        <span class="eco-idx">04</span>
+        <h3>湿地与湖泊</h3>
+        <p>候鸟迁徙的水上驿站</p>
+        <span class="eco-link">进入讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="eco-card reveal reveal-d1" href="cities/ordos.html">
+        <img src="assets/img/ordos-huanghe.webp" alt="黄河流域" loading="lazy">
+        <span class="eco-idx">05</span>
+        <h3>黄河流域</h3>
+        <p>几字弯与河套文明</p>
+        <span class="eco-link">进入讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="eco-card reveal reveal-d2" href="map.html">
+        <img src="assets/img/home-wildlife.webp" alt="物种与保护" loading="lazy">
+        <span class="eco-idx">06</span>
+        <h3>物种与保护</h3>
+        <p>蒙古野驴、遗鸥与草原食物链</p>
+        <span class="eco-link">进入讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a></div>
+    </div>
+  </section>
+
+  <section class="section heritage-section" id="heritage">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="title-wrap">
+          <span class="eyebrow">LIVING HERITAGE</span>
+          <h2>草原文脉，匠心传承</h2>
+          <p>长调、呼麦、马头琴、安代舞、刺绣与奶食技艺——它们不是展柜里的标本，而是仍在草原上发生的生活。</p>
+        </div>
+        <a class="text-link head-link" href="map.html">在城市里寻找非遗 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="filter-bar reveal" role="tablist" aria-label="非遗类别筛选">
+        <button class="filter-btn is-active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="music">音乐</button>
+        <button class="filter-btn" data-filter="dance">舞蹈</button>
+        <button class="filter-btn" data-filter="craft">技艺</button>
+        <button class="filter-btn" data-filter="folk">民俗</button>
+        <button class="filter-btn" data-filter="food">美食</button>
+      </div>
+      <div class="heritage-grid">
+      <button class="heritage-card" data-heritage="0" data-cat="music">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-changdiao.webp" alt="蒙古族长调民歌" loading="lazy">
+          <span class="heritage-level">世界级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统音乐</span>
+          <h3>蒙古族长调民歌</h3>
+          <p>悠长、自由、辽阔，像风穿过草浪。长调是蒙古族音乐最具辨识度的声音。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="1" data-cat="music">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-matouqin.webp" alt="马头琴音乐" loading="lazy">
+          <span class="heritage-level">国家级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统音乐</span>
+          <h3>马头琴音乐</h3>
+          <p>琴首雕作马头，琴声深沉如风穿草浪。它是草原叙事最重要的拉弦乐器。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="2" data-cat="music">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-humai.webp" alt="蒙古族呼麦" loading="lazy">
+          <span class="heritage-level">世界级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统音乐</span>
+          <h3>蒙古族呼麦</h3>
+          <p>一个人同时唱出两个声部，低音如大地，高音如风。呼麦是喉咙里的复调。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="3" data-cat="dance">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-anda.webp" alt="安代舞" loading="lazy">
+          <span class="heritage-level">国家级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统舞蹈</span>
+          <h3>安代舞</h3>
+          <p>众人围圈、踏地为节，甩巾、踏步、旋转。安代舞是科尔沁草原最具感染力的集体舞。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="4" data-cat="folk">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-chenglingji.webp" alt="成吉思汗祭典" loading="lazy">
+          <span class="heritage-level">国家级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">民俗</span>
+          <h3>成吉思汗祭典</h3>
+          <p>达尔扈特人守护数百年的祭祀传统，以牲祭、奶祭、歌祭与祝颂维系集体记忆。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="5" data-cat="craft">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-cixiu.webp" alt="蒙古族刺绣" loading="lazy">
+          <span class="heritage-level">自治区级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统美术</span>
+          <h3>蒙古族刺绣</h3>
+          <p>针线在毡、布与皮革上游走，绣出云纹、犄纹与花草。草原的祝福被缝进衣领与靴面。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="6" data-cat="craft">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-balinshidiao.webp" alt="巴林石雕" loading="lazy">
+          <span class="heritage-level">国家级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统美术</span>
+          <h3>巴林石雕</h3>
+          <p>巴林石产于赤峰巴林右旗，质地温润、色彩丰富。艺人因石施艺，把天然纹理化作山水与草原故事。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button>
+      <button class="heritage-card" data-heritage="7" data-cat="food">
+        <span class="heritage-media">
+          <img src="assets/img/heritage-naizhipin.webp" alt="奶制品制作技艺" loading="lazy">
+          <span class="heritage-level">国家级</span>
+        </span>
+        <span class="heritage-body">
+          <span class="cat">传统技艺</span>
+          <h3>奶制品制作技艺</h3>
+          <p>鲜奶在锅里慢慢分离，做成奶豆腐、奶皮子、奶嚼口与奶茶。草原饮食的智慧都在这口锅里。</p>
+          <span class="more">展开讲解 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </button></div>
+    </div>
+  </section>
+
+  <section class="section route-builder-section" id="routes">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="title-wrap">
+          <span class="eyebrow">BUILD YOUR ROUTE</span>
+          <h2>选几天，拼一条<br>自己的北疆</h2>
+          <p>先定天数，再把十二城拖进日程。点生成，得到一条按天排好的研学路线。</p>
+        </div>
+        <span class="route-head-note">DRAG · DROP · GENERATE</span>
+      </div>
+
+      <div class="route-builder">
+        <div class="route-map-card">
+          <div class="route-day-picker">
+            <span>去几天</span>
+            <div class="route-day-btns" id="routeDayBtns"></div>
+          </div>
+          <div class="route-map" id="routeMap">
+            <span class="route-map-hint">拖动城市到右侧日程，或点击城市加入</span>
+          </div>
+        </div>
+
+        <div class="route-plan-card">
+          <div class="route-plan-head">
+            <div><span>MY ITINERARY</span><b><span id="routePlanDays">5</span> 天 · <span id="routePlanCities">0</span> 城</b></div>
+            <button type="button" id="routeClear">清空</button>
+          </div>
+          <div class="route-slots" id="routeSlots"></div>
+          <div class="route-plan-actions"><button class="btn btn-dark" type="button" id="routeGenerate">生成研学路线 →</button></div>
+          <p class="route-plan-tip">拖动地图上的城市，或点击城市自动填入下一个空位；点日程里的 × 可移除。</p>
+        </div>
+      </div>
+
+      <div class="route-result" id="routeResult" hidden></div>
+    </div>
+  </section>
+
+  <section class="section learn-section" id="learn">
+    <div class="container">
+      <div class="learn-layout">
+        <div class="learn-mascot reveal">
+          <div class="ring-text"></div>
+          <img src="assets/img/mengyixing-new.webp" alt="蒙益行吉祥物">
+          <span class="learn-badge b1">VR 全景 · 720°</span>
+          <span class="learn-badge b2">生态观测 · 12 城</span>
+          <span class="learn-badge b3">非遗工坊 · 36 项</span>
+        </div>
+        <div class="learn-copy reveal reveal-d1">
+          <span class="eyebrow">MENGYIXING CLASSROOM</span>
+          <h2>把北疆，变成一堂<br>可以走进去的课</h2>
+          <p>蒙益行不是一份景点清单，而是一套可以用来上课、做研学、准备旅行的北疆知识地图。先选一座城，再沿着景点、非遗与生态往下走。</p>
+          <div class="learn-modes">
+            <a class="learn-mode" href="map.html"><b>城市研学</b><span>十二盟市，逐个进入</span></a>
+            <a class="learn-mode" href="#heritage"><b>非遗图鉴</b><span>看技艺，也看传承人</span></a>
+            <a class="learn-mode" href="#ecology"><b>生态课堂</b><span>六大生态系统对照</span></a>
+            <a class="learn-mode" href="#routes"><b>路线设计</b><span>把点连成一条线</span></a>
+          </div>
+          <div class="learn-actions">
+            <button class="btn btn-dark" id="startQuiz">开始知识小测 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <a class="btn btn-ghost" style="color:var(--pine);border-color:rgba(23,61,46,.28)" href="#cities">先看十二城</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<div class="pano-home-modal" id="panoHomeModal" aria-hidden="true">
+  <div class="pano-home-backdrop" data-pano-close></div>
+  <div class="pano-home-panel" role="dialog" aria-modal="true" aria-labelledby="panoHomeTitle">
+    <div class="pano-home-head">
+      <div>
+        <span class="pano-home-eyebrow">360° PANORAMA</span>
+        <h2 id="panoHomeTitle">北疆全景</h2>
+      </div>
+      <button class="pano-home-close" type="button" data-pano-close aria-label="关闭全景">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="pano-home-stage" id="panoHomeStage">
+      <canvas id="panoHomeCanvas"></canvas>
+      <div class="pano-home-angle" id="panoHomeAngle">旋转视角 0°</div>
+      <div class="pano-home-hint">左右拖动画面 · 上下看</div>
+    </div>
+    <div class="pano-home-controls">
+      <span>左右旋转视角</span>
+      <input type="range" id="panoHomeRange" min="0" max="360" value="0" aria-label="左右旋转视角">
+      <span id="panoHomeDeg">0°</span>
+    </div>
+    <div class="pano-tools">
+      <button class="pano-tool" type="button" id="panoGyro">陀螺仪环视</button>
+      <button class="pano-tool" type="button" id="panoVoice">语音讲解</button>
+      <button class="pano-tool" type="button" id="panoPassportBtn">VR 护照 <span id="panoPassportMini">0/10</span></button>
+    </div>
+    <p class="pano-home-note" id="panoHomeNote">真实球面全景 · 素材来源 360Cities</p>
+  </div>
+</div>
+<div class="vr-passport-modal" id="vrPassportModal" aria-hidden="true">
+  <div class="vr-passport-backdrop" data-vr-close></div>
+  <div class="vr-passport-panel" role="dialog" aria-modal="true" aria-labelledby="vrPassportTitle">
+    <div class="vr-passport-head">
+      <div><span>VR PASSPORT</span><h2 id="vrPassportTitle">北疆全景护照</h2></div>
+      <button class="vr-passport-close" type="button" data-vr-close aria-label="关闭护照"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <p class="vr-passport-sub">本次浏览每打开一个球面全景，盖一枚章；集满 5 枚解锁北疆 VR 研学证书。重新打开页面会重新开始。</p>
+    <div class="vr-stamps" id="vrStamps"></div>
+    <div class="vr-cert" id="vrCert">
+      <div class="vr-cert-inner">
+        <svg class="vr-cert-knot tl" viewBox="0 0 80 80" aria-hidden="true"><path d="M8 40Q8 16 32 16H48Q72 16 72 40Q72 64 48 64H32Q8 64 8 40Z M20 40Q20 28 32 28H48Q60 28 60 40Q60 52 48 52H32Q20 52 20 40Z"/></svg>
+        <svg class="vr-cert-knot tr" viewBox="0 0 80 80" aria-hidden="true"><path d="M8 40Q8 16 32 16H48Q72 16 72 40Q72 64 48 64H32Q8 64 8 40Z M20 40Q20 28 32 28H48Q60 28 60 40Q60 52 48 52H32Q20 52 20 40Z"/></svg>
+        <svg class="vr-cert-knot bl" viewBox="0 0 80 80" aria-hidden="true"><path d="M8 40Q8 16 32 16H48Q72 16 72 40Q72 64 48 64H32Q8 64 8 40Z M20 40Q20 28 32 28H48Q60 28 60 40Q60 52 48 52H32Q20 52 20 40Z"/></svg>
+        <svg class="vr-cert-knot br" viewBox="0 0 80 80" aria-hidden="true"><path d="M8 40Q8 16 32 16H48Q72 16 72 40Q72 64 48 64H32Q8 64 8 40Z M20 40Q20 28 32 28H48Q60 28 60 40Q60 52 48 52H32Q20 52 20 40Z"/></svg>
+        <svg class="vr-cert-cloud tl" viewBox="0 0 130 54" aria-hidden="true"><path d="M6 42Q6 22 27 22Q35 5 52 14Q66 2 80 15Q99 10 108 26Q124 28 124 42" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        <svg class="vr-cert-cloud tr" viewBox="0 0 130 54" aria-hidden="true"><path d="M6 42Q6 22 27 22Q35 5 52 14Q66 2 80 15Q99 10 108 26Q124 28 124 42" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        <div class="vr-cert-head">
+        <svg class="vr-cert-crest" viewBox="0 0 120 64" aria-hidden="true">
+          <path d="M60 3V57M44 18L60 30L76 18M47 32L60 44L73 32M51 45L60 54L69 45" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M52 59H68M56 3Q60 -4 64 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="60" cy="10" r="2.6" fill="currentColor"/>
+        </svg>
+          <span class="vr-cert-eyebrow">MENGYIXING · VR FIELD CERTIFICATE</span>
+          <h3>北疆 VR 研学证书</h3>
+          <p class="vr-cert-en">BEIJIANG · IMMERSIVE FIELD STUDY</p>
+        </div>
+        <div class="vr-cert-body">
+          <p class="vr-cert-to">授予</p>
+          <p class="vr-cert-name">蒙益行 · 北疆探索者</p>
+          <p class="vr-cert-desc">已完成 <b id="vrCertCount">0</b> 个球面全景环视，<br>以虚拟现实的方式走过草原、沙漠、湖泊与召庙。</p>
+          <p class="vr-cert-tags">草原 · 沙漠 · 湖泊 · 召庙 · 非遗</p>
+        </div>
+        <div class="vr-cert-meta">
+          <span id="vrCertDate"></span>
+          <span>NO. <b id="vrCertNo">0000</b></span>
+        </div>
+        <div class="vr-cert-seal">
+          <svg viewBox="0 0 35.176 35.175" aria-hidden="true"><path d="M11.394 18.559c-.091-.294-.168-.575-.264-.851-.156-.446-.192-.886-.074-1.358.156-.623.257-1.26.362-1.894.03-.178-.002-.369-.02-.553-.011-.108-.086-.22-.07-.32.072-.45-.143-.819-.296-1.211-.181-.463-.344-.933-.503-1.405-.049-.146-.12-.222-.294-.193-.107-.785-.299-1.547-.677-2.272-.032-.138-.101-.113-.168-.089-.485.173-.971.323-1.48.43-.53.112-1.027.382-1.538.585-.326.129-.651.261-.986.396-.081.112-.202.219-.249.353-.154.436-.444.67-1.077.654-.154-.09-.434-.315-.753-.428-.561-.198-.55-.682-.657-1.12-.065-.265-.12-.472-.191-.753.126-.226.211-.553.511-.791.221-.176.337-.48.511-.719.412-.564.844-1.114 1.24-1.689.13-.188.263-.445.242-.656-.068-.705.331-1.102.834-1.459.015-.01.025-.028-.023-.059.074-.27.147-.541.221-.812.005-.095.033-.097.061-.098-.116-.379-.23-.758-.352-1.162-.056.085-.097.15-.188.294.054-.577-.135-1.091.176-1.647.256.33.437.619.675.852.248.241.549.426.856.659.186-.116.387-.242.581-.362.051-.383.1-.749.155-1.166.159-.064.332-.036.456.184.152.272.3.546.467.809.088.138.193.28.324.374.309.221.642.41.959.621.351.235.697.478 1.042.723.12.085.216.223.347.271.307.114.47.345.556.558.5.36.988.603 1.337 1.057.334.434.73.819 1.099 1.226.161.177.37.331.473.537.158.318.42.439.721.537.423.138.811.32 1.179.594.436.325.959.531 1.435.805.318.184.622.395.932.595.598.386 1.221.558 1.944.377.548-.137 1.12-.174 1.681-.256.073-.011.149-.017.217-.045.709-.298 1.465-.345 2.218-.401.073-.005.155-.005.216-.038.632-.344 1.318-.19 1.969-.154.399.021.814.254 1.17.475.67.416 1.323.864 1.941 1.352.458.362.865.794 1.178 1.3.241.39.562.726.706 1.18.151.477.312.934.146 1.454-.088.274-.062.586-.074.881-.03.669-.326 1.273-.456 1.917-.022.108-.079.229-.052.324.143.495-.053.984-.002 1.476.037.362.086.726.219 1.099-.059.09-.116.18-.169.262.019.316.05.626.052.937.007 1.184.005 2.369.006 3.553 0 .13-.027.269.008.389.102.333.125.646-.082.952-.047.068-.039.179-.039.271-.002 1.004 0 2.008.004 3.013 0 .091.027.182.054.334-.603.031-1.2.016-1.837-.009.048.459-.104.919-.016 1.398.053.287.045.589-.197.832-.223.224-.271.512-.244.821.019.221.004.444.004.643-.247.293-.559.228-.85.233-.274.005-.547.001-.864.001-.224-.327-.019-.662.179-.926.348-.465.525-.96.537-1.533.002-.123.051-.262.122-.362.259-.365.31-.776.321-1.207.004-.181.055-.361.093-.54.137-.632.296-1.272.219-1.914-.062-.504-.149-1.019-.272-1.507-.102-.4-.194-.729.021-1.104.057-.101.068-.271.023-.378-.24-.577-.137-1.209-.312-1.793-.078-.26-.164-.517-.275-.866.088-.215.063-.531-.052-.861-.12-.347-.174-.717-.29-1.064-.08-.237-.219-.455-.361-.743-.184.1-.357.142-.444.252-.319.404-.69.795-.892 1.257-.25.582-.459 1.183-.293 1.884.174.729.289 1.474.522 2.196.058-.042.101-.073.146-.105.012.034.037.069.033.102-.127.952-.674 1.74-1.019 2.605-.124.312-.251.625-.351.945-.144.458-.392.873-.554 1.314-.194.531-.481 1.03-.569 1.612-.099.657-.143.651-.817 1.128-.038.189-.108.402-.114.617-.005.19.062.383.1.589-.762.281-1.442.232-2.14-.063.123-.513.517-.774.771-1.125.275-.379.507-.742.59-1.224.072-.425.238-.852.449-1.229.383-.681.609-1.424.938-2.125.062-.132.136-.261.179-.399.078-.255.197-.491.115-.79-.066-.242-.02-.517-.027-.776-.01-.291.052-.589-.172-.85-.062-.071-.043-.258 0-.365.099-.24-.013-.402-.101-.616-.259-.626-.606-1.227-.631-1.936-.011-.29-.097-.576-.155-.896-.283-.065-.562-.064-.845.071-.13.062-.281.108-.423.107-.598-.004-1.189.226-1.795.021-.166-.058-.368-.009-.555-.015-.644-.021-1.287-.044-1.954-.066-.167.146-.208.368-.172.592.088.555-.194 1.095-.052 1.649-.249.549-.22 1.151-.335 1.728-.09.45-.119.912-.174 1.368-.016.128-.006.264-.047.383-.078.222-.022.427 0 .649.054.541.162 1.081-.145 1.617-.218.382-.192.84-.018 1.268.346.853.419 1.74.317 2.646-.008.072-.02.156-.062.208-.286.354-.156.688.019 1.035.23.457.222.581-.022 1.071-.623-.008-1.26.32-1.906.024.027-.237.048-.427.072-.634-.698.127-.777.118-1.1-.119.203-.402.393-.803.761-1.111.197-.166.386-.408.348-.723.337-.437.197-.947.212-1.432.006-.217-.062-.435-.086-.653-.033-.305-.063-.61-.082-.918-.052-.857-.308-1.664-.608-2.46-.045-.119-.104-.246-.102-.368.007-.395-.121-.763-.183-1.141-.077-.473-.309-.869-.467-1.298-.252-.685-.63-1.314-.942-1.972-.242-.513-.398-1.072-.526-1.626-.083-.357-.199-.658-.468-.913-.186-.177-.327-.399-.489-.601-.169-.114-.319-.297-.449-.456z" fill="currentColor"/></svg>
+          <span>蒙益行</span><small>北疆研学</small>
+        </div>
+        <svg class="vr-cert-scene" viewBox="0 0 800 180" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 96Q110 58 238 86T512 78T800 98V180H0Z" fill="#dfe7d2"/>
+          <path d="M0 122Q160 92 320 114T620 106T800 124V180H0Z" fill="#b9c69f"/>
+          <path d="M0 148Q200 122 400 144T800 142V180H0Z" fill="#8fa377"/>
+          <path d="M0 143Q180 117 360 138T800 132" fill="none" stroke="#9dbfc6" stroke-width="4" opacity=".75"/>
+          <circle cx="62" cy="34" r="16" fill="#f3d9a0" stroke="#c9a15e" stroke-width="1.1"/>
+          <g stroke="#c9a15e" stroke-width="1.1" stroke-linecap="round"><path d="M62 10v-5M62 63v-5M38 34h-5M91 34h-5M44 16l-4-4M80 52l4 4M80 16l4-4M44 52l-4 4"/></g>
+          <g transform="translate(132,42)" fill="none" stroke="#6f7358" stroke-width="1.5" stroke-linecap="round"><path d="M-17 8Q-8 -6 0 0Q8 -6 17 8"/><path d="M-6 2L0 9L6 2"/></g>
+          <g transform="translate(110,95) scale(1.4)" fill="#3d4a35"><path d="M11.394 18.559c-.091-.294-.168-.575-.264-.851-.156-.446-.192-.886-.074-1.358.156-.623.257-1.26.362-1.894.03-.178-.002-.369-.02-.553-.011-.108-.086-.22-.07-.32.072-.45-.143-.819-.296-1.211-.181-.463-.344-.933-.503-1.405-.049-.146-.12-.222-.294-.193-.107-.785-.299-1.547-.677-2.272-.032-.138-.101-.113-.168-.089-.485.173-.971.323-1.48.43-.53.112-1.027.382-1.538.585-.326.129-.651.261-.986.396-.081.112-.202.219-.249.353-.154.436-.444.67-1.077.654-.154-.09-.434-.315-.753-.428-.561-.198-.55-.682-.657-1.12-.065-.265-.12-.472-.191-.753.126-.226.211-.553.511-.791.221-.176.337-.48.511-.719.412-.564.844-1.114 1.24-1.689.13-.188.263-.445.242-.656-.068-.705.331-1.102.834-1.459.015-.01.025-.028-.023-.059.074-.27.147-.541.221-.812.005-.095.033-.097.061-.098-.116-.379-.23-.758-.352-1.162-.056.085-.097.15-.188.294.054-.577-.135-1.091.176-1.647.256.33.437.619.675.852.248.241.549.426.856.659.186-.116.387-.242.581-.362.051-.383.1-.749.155-1.166.159-.064.332-.036.456.184.152.272.3.546.467.809.088.138.193.28.324.374.309.221.642.41.959.621.351.235.697.478 1.042.723.12.085.216.223.347.271.307.114.47.345.556.558.5.36.988.603 1.337 1.057.334.434.73.819 1.099 1.226.161.177.37.331.473.537.158.318.42.439.721.537.423.138.811.32 1.179.594.436.325.959.531 1.435.805.318.184.622.395.932.595.598.386 1.221.558 1.944.377.548-.137 1.12-.174 1.681-.256.073-.011.149-.017.217-.045.709-.298 1.465-.345 2.218-.401.073-.005.155-.005.216-.038.632-.344 1.318-.19 1.969-.154.399.021.814.254 1.17.475.67.416 1.323.864 1.941 1.352.458.362.865.794 1.178 1.3.241.39.562.726.706 1.18.151.477.312.934.146 1.454-.088.274-.062.586-.074.881-.03.669-.326 1.273-.456 1.917-.022.108-.079.229-.052.324.143.495-.053.984-.002 1.476.037.362.086.726.219 1.099-.059.09-.116.18-.169.262.019.316.05.626.052.937.007 1.184.005 2.369.006 3.553 0 .13-.027.269.008.389.102.333.125.646-.082.952-.047.068-.039.179-.039.271-.002 1.004 0 2.008.004 3.013 0 .091.027.182.054.334-.603.031-1.2.016-1.837-.009.048.459-.104.919-.016 1.398.053.287.045.589-.197.832-.223.224-.271.512-.244.821.019.221.004.444.004.643-.247.293-.559.228-.85.233-.274.005-.547.001-.864.001-.224-.327-.019-.662.179-.926.348-.465.525-.96.537-1.533.002-.123.051-.262.122-.362.259-.365.31-.776.321-1.207.004-.181.055-.361.093-.54.137-.632.296-1.272.219-1.914-.062-.504-.149-1.019-.272-1.507-.102-.4-.194-.729.021-1.104.057-.101.068-.271.023-.378-.24-.577-.137-1.209-.312-1.793-.078-.26-.164-.517-.275-.866.088-.215.063-.531-.052-.861-.12-.347-.174-.717-.29-1.064-.08-.237-.219-.455-.361-.743-.184.1-.357.142-.444.252-.319.404-.69.795-.892 1.257-.25.582-.459 1.183-.293 1.884.174.729.289 1.474.522 2.196.058-.042.101-.073.146-.105.012.034.037.069.033.102-.127.952-.674 1.74-1.019 2.605-.124.312-.251.625-.351.945-.144.458-.392.873-.554 1.314-.194.531-.481 1.03-.569 1.612-.099.657-.143.651-.817 1.128-.038.189-.108.402-.114.617-.005.19.062.383.1.589-.762.281-1.442.232-2.14-.063.123-.513.517-.774.771-1.125.275-.379.507-.742.59-1.224.072-.425.238-.852.449-1.229.383-.681.609-1.424.938-2.125.062-.132.136-.261.179-.399.078-.255.197-.491.115-.79-.066-.242-.02-.517-.027-.776-.01-.291.052-.589-.172-.85-.062-.071-.043-.258 0-.365.099-.24-.013-.402-.101-.616-.259-.626-.606-1.227-.631-1.936-.011-.29-.097-.576-.155-.896-.283-.065-.562-.064-.845.071-.13.062-.281.108-.423.107-.598-.004-1.189.226-1.795.021-.166-.058-.368-.009-.555-.015-.644-.021-1.287-.044-1.954-.066-.167.146-.208.368-.172.592.088.555-.194 1.095-.052 1.649-.249.549-.22 1.151-.335 1.728-.09.45-.119.912-.174 1.368-.016.128-.006.264-.047.383-.078.222-.022.427 0 .649.054.541.162 1.081-.145 1.617-.218.382-.192.84-.018 1.268.346.853.419 1.74.317 2.646-.008.072-.02.156-.062.208-.286.354-.156.688.019 1.035.23.457.222.581-.022 1.071-.623-.008-1.26.32-1.906.024.027-.237.048-.427.072-.634-.698.127-.777.118-1.1-.119.203-.402.393-.803.761-1.111.197-.166.386-.408.348-.723.337-.437.197-.947.212-1.432.006-.217-.062-.435-.086-.653-.033-.305-.063-.61-.082-.918-.052-.857-.308-1.664-.608-2.46-.045-.119-.104-.246-.102-.368.007-.395-.121-.763-.183-1.141-.077-.473-.309-.869-.467-1.298-.252-.685-.63-1.314-.942-1.972-.242-.513-.398-1.072-.526-1.626-.083-.357-.199-.658-.468-.913-.186-.177-.327-.399-.489-.601-.169-.114-.319-.297-.449-.456z"/></g>
+          <g transform="translate(230,96) scale(2)" fill="#3d4a35"><path d="M20 8.5a2.5 2.5 0 0 1-2.5 2.5c-1.08 0-2-.69-2.34-1.64c-.44.39-1.02.64-1.66.64c-.56 0-1.08-.19-1.5-.5c-.42.31-.93.5-1.5.5c-.64 0-1.22-.25-1.66-.64C8.5 10.31 7.58 11 6.5 11A2.5 2.5 0 0 1 4 8.5c0-1.24.91-2.27 2.1-2.46c-.06-.17-.1-.35-.1-.54A1.5 1.5 0 0 1 7.5 4c.2 0 .39.04.56.11C8.23 3.47 8.81 3 9.5 3c.25 0 .5.07.68.17C10.5 2.5 11.19 2 12 2s1.5.5 1.82 1.17c.18-.1.43-.17.68-.17c.69 0 1.27.47 1.44 1.11c.17-.07.36-.11.56-.11A1.5 1.5 0 0 1 18 5.5c0 .19-.04.37-.1.54c1.19.19 2.1 1.22 2.1 2.46M10 12a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m4 0a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m6.23-1.34c-.64.81-1.62 1.34-2.73 1.34c-.45 0-.88-.1-1.29-.27c-.01 2.55-.38 5.63-1.76 7.22c-.52.59-1.15.91-1.95 1.01V18h-1v1.96c-.8-.1-1.43-.41-1.95-1.01c-1.39-1.6-1.76-4.66-1.77-7.21c-.4.16-.83.26-1.28.26c-1.11 0-2.09-.53-2.73-1.34C2.88 11.55 2 12 2 12s1 2 3 2c.36 0 .64-.04.88-.09C6.22 17.73 7.58 22 12 22s5.78-4.27 6.12-8.09c.24.05.52.09.88.09c2 0 3-2 3-2s-.88-.45-1.77-1.34"/></g>
+          <g transform="translate(315,103) scale(0.08)" fill="#3d4a35"><path d="M96 224v192c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32v-88.2c9.9 6.6 20.6 12 32 16.1v24.2c0 8.8 7.2 16 16 16s16-7.2 16-16v-16.9c5.3.6 10.6.9 16 .9s10.7-.3 16-.9v16.9c0 8.8 7.2 16 16 16s16-7.2 16-16v-24.2c11.4-4 22.1-9.4 32-16.1V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V256l32 32v49.5c0 9.5 2.8 18.7 8.1 26.6L530 427c8.8 13.1 23.5 21 39.3 21c22.5 0 41.9-15.9 46.3-38l20.3-101.6c2.6-13-.3-26.5-8-37.3l-3.9-5.5V184c0-13.3-10.7-24-24-24s-24 10.7-24 24v14.4l-52.9-74.1C496 86.5 452.4 64 405.9 64H144C77.7 64 24 117.7 24 184v54C9.4 249.8 0 267.8 0 288v17.6c0 8 6.4 14.4 14.4 14.4c31.8 0 57.6-25.8 57.6-57.6V184c0-24.3 12.1-45.8 30.5-58.9c-4.2 10.8-6.5 22.6-6.5 34.9zm464 112a16 16 0 1 1 32 0a16 16 0 1 1-32 0M166.6 166.6c-4.2-4.2-6.6-10-6.6-16c0-12.5 10.1-22.6 22.6-22.6h178.7c12.5 0 22.6 10.1 22.6 22.6c0 6-2.4 11.8-6.6 16L353.9 190c-21.7 21.8-51.2 34-81.9 34s-60.2-12.2-81.9-33.9l-23.4-23.4z"/></g>
+          <g transform="translate(440,96) scale(0.09375)" fill="#3d4a35"><path d="M420.8 26.91c-11.4.76-23.7 4.65-33.6 10.29c-5.3-4.86-13.5-10.52-19.3-6.11c-12.5 9.46-2.4 20.76 6.8 27.94c5.5 35.86 20.7 93.17-9.8 105.97C317 183.1 308.4 36.14 241 37.94c-40.4 1.08-22.6 59.65-62.6 61.65c-29.5 1.51-27.3-54.51-51.9-55.36c-25.9-.9-44.62 18.9-57.71 86.97c-25.63-.1-35.73 20.1-47.42 59.2c-11.686 39-3 115.6 1.2 162.4l7.87-76.3c2.43 12 6.19 24.1 11.91 36.7c3.91 18.7 5.44 37.4 5.81 56c-8.2 10.2-8.8 26.2-.42 35.5c-.92 26.8-2.67 53.5-1.68 80.3c34.48.5 66.04-1 99.54 0c1.8-11.9-14.9-20.4-34.3-30.3c.3-13.7.2-30.5 0-47.5c8.8-10.2 9-28.1-.2-36.8c.1-21.3.8-38.6 3.3-43.9c8-17.1 20.6-31.9 29.1-47.2c28.7 5.3 59.7 2.9 91.9-4.7l.7 85.5c-7.7 11.3-8 27.7.3 37.8c4.7 29 .6 58.1.8 87.1h58c2.3-15-22.5-23.1-34.6-30.1c0-22.1-3.9-38.8-.4-60.3c5-9.9 5.3-21.5.4-30.8c.9-33 3.3-66 10.7-99c1.6-.6 7.9-3.7 9.3-5.3l10.9 98.4c-5.6 11.9-4.4 27.3 4 36.7c6.6 30.1 4.5 59.5 7.9 89.6l61.2.8c.3-12.3-29.1-20-40.3-25.5c-6.4-21.4-5.7-43.1-6.7-64.9c8-12.1 7.6-28.9-1.1-39.5c.5-38.3 5.5-76.8 18.4-114.6c106.6-5.9 96.2-72 99.3-133.2c1.4-27.24 55.5 1.7 60-11.61c2.4-6.92 3.6-13.89 0-21.84c-8.6-19.29-23.9-20.32-36.7-20.63c-12.3-7.36-22.6-25.96-35.5-26.31z"/></g>
+          
+          <g transform="translate(660,112)" fill="#f6f0df" stroke="#6f7358" stroke-width="1.6">
+            <path d="M-30 32Q-30 -2 0 -20Q30 -2 30 32Z"/><path d="M-34 32H34" fill="none"/>
+            <rect x="-9" y="14" width="18" height="18" fill="#8a5b3f" stroke="none"/>
+            <path d="M-27 7L0 -10L27 7" fill="none" stroke="#c9a15e"/>
+          </g>
+          <g transform="translate(735,128)" fill="none" stroke="#6f7358" stroke-width="1.5">
+            <circle cx="0" cy="0" r="16"/><circle cx="0" cy="0" r="4"/>
+            <path d="M0 -16V16M-16 0H16M-11 -11L11 11M11 -11L-11 11"/>
+            <path d="M-16 0H-28M-28 -8H-40"/>
+          </g>
+          <g stroke="#6f7358" stroke-width="1" opacity=".6"><path d="M80 150v16M90 146v20M100 151v15M200 146v16M210 142v20M220 148v14M370 148v16M620 150v14M700 150v14"/></g>
+        </svg>
+        <div class="vr-cert-foot">MENGYIXING · 内蒙古十二盟市数字志 · 智游内蒙古</div>
+      </div>
+    </div>
+    <div class="vr-passport-actions">
+      <button class="btn btn-dark" type="button" id="vrPrint">打印证书</button>
+      <button class="btn" type="button" data-vr-close>继续漫游</button>
+    </div>
+  </div>
+</div>
+<div class="vr-toast" id="vrToast" role="status"></div>
+<div class="mascot-modal" id="mascotModal" aria-hidden="true">
+  <div class="mascot-modal-bg" data-mascot-close></div>
+  <div class="mascot-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mascotTitle">
+    <div class="mascot-modal-head">
+      <img src="assets/img/mengyixing-avatar.png" alt="蒙益行头像">
+      <div><span>MENGYIXING · 北疆向导</span><h2 id="mascotTitle">我是蒙益行，想聊点什么？</h2></div>
+      <button class="mascot-modal-close" type="button" data-mascot-close aria-label="关闭">×</button>
+    </div>
+    <div class="mascot-tabs" role="tablist">
+      <button type="button" data-mascot-tab="ask" class="is-active">问我三道题</button>
+      <button type="button" data-mascot-tab="read">读一段北疆</button>
+      <button type="button" data-mascot-tab="go">带我去逛</button>
+    </div>
+    <div class="mascot-panels">
+      <section class="mascot-panel is-active" data-mascot-panel="ask"><div id="mascotQuiz"></div></section>
+      <section class="mascot-panel" data-mascot-panel="read"><div class="mascot-read" id="mascotRead"></div></section>
+      <section class="mascot-panel" data-mascot-panel="go">
+        <div class="mascot-go">
+          <a class="btn btn-dark" href="map.html">打开城市地图 →</a>
+          <a class="btn" href="index.html#panorama">看 360° 全景 →</a>
+          <a class="btn" href="hall.html">进 3D 展厅 →</a>
+          <a class="btn" href="index.html#heritage">逛非遗图谱 →</a>
+          <button class="btn" type="button" id="mascotFullQuiz">挑战完整 10 题 →</button>
+        </div>
+        <p class="mascot-go-note">想自己走走，就点上面任意一个入口；想先练练手，就留在“问我三道题”。</p>
+      </section>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"><img src="assets/img/mengyixing-avatar.png" alt="蒙益行吉祥物头像"></span>
+          <span class="brand-text"><h1>蒙益行</h1><p>MENGYIXING · 智游内蒙古</p></span>
+        </a>
+        <p>以十二盟市为坐标，把内蒙古的生态、景点、非遗与研学路线，做成一张可以走进去的数字地图。</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索</h4>
+        <a href="map.html">城市地图</a>
+        <a href="index.html#cities">十二城志</a>
+        <a href="index.html#ecology">生态北疆</a>
+        <a href="index.html#heritage">非遗图谱</a>
+      </div>
+      <div class="footer-col">
+        <h4>研学</h4>
+        <a href="index.html#routes">主题路线</a>
+        <a href="index.html#learn">蒙益行小课堂</a>
+        <a href="index.html#learn">知识小测</a>
+        <a href="map.html">在地图上寻找</a>
+      </div>
+      <div class="footer-col">
+        <h4>关于</h4>
+        <a href="index.html#map">平台理念</a>
+        <a href="index.html#ecology">生态教育</a>
+        <a href="index.html#heritage">文化传承</a>
+        <a href="#top">返回顶部</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 蒙益行 · 智游内蒙古</span>
+      <span class="mono">MENGYIXING · INNER MONGOLIA · 12 CITIES</span>
+    </div>
+    <div class="footer-big" aria-hidden="true">北疆万象</div>
+  </div>
+</footer>
+
+<div class="guide">
+  <div class="guide-panel" id="guidePanel">
+    <div class="gp-head">
+      <img src="assets/img/mengyixing-new.webp" alt="蒙益行">
+      <div><b>蒙益行小助手</b><span>MENGYIXING GUIDE</span></div>
+    </div>
+    <p>我是蒙益行。先点地图选一座城，或者让我直接带你去看看。</p>
+    <div class="guide-links"><a href="map.html">打开城市地图<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="index.html#cities">十二城速览<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="index.html#heritage">非遗图谱<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="index.html#learn">知识小测<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+  <button class="guide-toggle" id="guideToggle" aria-label="打开蒙益行小助手" aria-expanded="false" aria-controls="guidePanel">
+    <img src="assets/img/mengyixing-new.webp" alt="">
+  </button>
+</div>
+
+<div class="modal" id="panguModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" data-close aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-media">
+      <img id="modalImg" src="assets/img/home-hero.webp" alt="">
+      <div class="modal-media-text">
+        <div class="cat" id="modalCat"></div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalSub"></p>
+      </div>
+    </div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+<script src="js/map-data.js"></script>
+<script src="js/heritage-data.js"></script>
+<script src="js/pano360.js"></script>
+<script src="js/pano-home-data.js"></script>
+<script src="js/home360.js"></script>
+<script src="js/quiz-data.js"></script>
+<script src="js/mascot.js"></script>
+<script src="js/route-detail.js"></script>
+<script src="js/route-builder.js"></script>
+<script src="js/pangu.js"></script>
+</body>
+</html>
